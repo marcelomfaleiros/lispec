@@ -353,16 +353,15 @@ class Report(qtw.QWidget, Ui_Form):
                 parcial_time_785 = round(array_orientador['Tempo 785 (h)'].sum(), 1)
                 parcial_time_633 = round(array_orientador['Tempo 633 (h)'].sum(), 1)
                 parcial_time_532 = round(array_orientador['Tempo 532 (h)'].sum(), 1)
-                object_str_785 += n + ' ' + str(parcial_time_785) + '\n' 
-                object_str_633 += n + ' ' + str(parcial_time_633) + '\n'
-                object_str_532 += n + ' ' + str(parcial_time_532) + '\n'
+                object_str_785 += n + ' ' + str(parcial_time_785) + '\n\n' 
+                object_str_633 += n + ' ' + str(parcial_time_633) + '\n\n'
+                object_str_532 += n + ' ' + str(parcial_time_532) + '\n\n'
+
                          
           self.report_label.setText('Tempo 785 nm total: ' + str(round(total_time_785, 1)) + 'h\n\n' +
-                                    object_str_785 + '\n' +
                                     'Tempo 633 nm total: ' + str(round(total_time_633, 1)) + 'h\n\n' +
-                                    object_str_633 + '\n' +
                                     'Tempo 532 nm total: ' + str(round(total_time_532, 1)) + 'h\n\n' +
-                                    object_str_532)
+                                    object_str_785 + object_str_633 + object_str_532)
       
        elif search_method == 'Orientador':
           total_time = data['Tempo total (h)'].sum()

@@ -13,17 +13,15 @@ class Report(qtw.QWidget, Ui_Form):
     '''
        
     ''' 
-
-    advisors_file = pd.read_csv('advisors_list.csv')
-    advisors_list = list(advisors_file['Orientador'])
     
     file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
                    "Humidade", "Usuário", "Status do usuário",
                    "Orientador", "Operador", "Natureza da amostra", 
                    "Número de amostras", "Descrição da amostra",
-                   "Aquisição de espectro", "Sistema de Imageamento",
-                   "Início laser", "Final laser", "Tempo laser (h)","Potência do laser", 
-                   "Filtros", "Objetivas", "Calibração", "Forno Linkam",
+                   "Porta-amostras", "Análises res. no tempo",
+                   "Fontes de excitação"
+                   "Início Exc.", "Final Exc.", "Tempo Exc (h)","Potência Exc.", 
+                   "Filtros", "Detectores", "Calibração", "Acessórios",
                    "Temperatura inicial", "Temperatura final", "Observações",
                    "Problema no instrumento"]
     
@@ -50,22 +48,29 @@ class Report(qtw.QWidget, Ui_Form):
         self.setObjectName("Relatório de Utilização")
         self.setupUi(self)
 
-        self.advisor_comboBox.addItems(self.advisors_list)
-        self.load_list()       
-        self.estat_method_comboBox.addItems(self.estat_method)
-        self.abrangencia_comboBox.addItems(self.coverage)
-        self.year_comboBox.addItems(self.year_list)
-        self.month_comboBox.addItems(self.months_list)
-
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
         self.cadastro_pushButton.clicked.connect(lambda: self.cadastro('add'))
         self.exclui_pushButton.clicked.connect(lambda: self.cadastro('exclui'))
         self.load_pushButton.clicked.connect(self.load_list)
 
+        advisors_file = pd.read_csv('advisors_list.csv')
+        self.advisors_list = list(advisors_file['Orientador'])
+        self.advisor_comboBox.addItems(self.advisors_list)
+      
+        self.estat_method_comboBox.addItems(self.estat_method)
+        self.abrangencia_comboBox.addItems(self.coverage)
+        self.year_comboBox.addItems(self.year_list)
+        self.month_comboBox.addItems(self.months_list)  
+
+        self.load_list()       
+
     def load_list(self):
         #importar users_list    
-        self.users_file = pd.read_csv('t64000_users_list.csv')
+        self.user_comboBox.clear()
+        self.technician_comboBox.clear()
+
+        self.users_file = pd.read_csv('fluorolog3_users_list.csv')
         self.users_list = list(self.users_file['Usuarios'])
 
         self.user_comboBox.addItems(sorted(self.users_list))
@@ -342,13 +347,13 @@ class Report(qtw.QWidget, Ui_Form):
        user = self.user_lineEdit.text()
        if action == 'add':         
           user = [user] 
-          with open('users_list.csv', 'a', newline='', encoding='utf8') as uf:
+          with open('fluorolog3_users_list.csv', 'a', newline='', encoding='utf8') as uf:
               write = csv.writer(uf)                
               write.writerow(user) 
        elif action == 'exclui':
-          users = pd.read_csv('users_list.csv')
+          users = pd.read_csv('fluorolog3_users_list.csv')
           users = users.drop(users[users.Usuarios == user].index)
-          users.to_csv('users_list.csv', index=False)                                                       
+          users.to_csv('fluorolog3_users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
     app = qtw.QApplication([])
