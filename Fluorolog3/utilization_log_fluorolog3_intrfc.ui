@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1042</width>
-    <height>876</height>
+    <height>937</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -410,7 +410,7 @@
          <property name="minimumSize">
           <size>
            <width>1000</width>
-           <height>200</height>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -428,8 +428,8 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="0">
            <widget class="QFrame" name="frame_11">
             <property name="minimumSize">
              <size>
@@ -531,7 +531,7 @@
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="0" column="1">
            <widget class="QFrame" name="frame_12">
             <property name="minimumSize">
              <size>
@@ -618,7 +618,7 @@
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="0" column="2">
            <widget class="QFrame" name="frame_14">
             <property name="maximumSize">
              <size>
@@ -636,43 +636,6 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="cubeta_checkBox">
-               <property name="text">
-                <string>Cubeta</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Preferred</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="cela_checkBox">
-               <property name="text">
-                <string>Cela</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="tubo_checkBox">
-               <property name="text">
-                <string>Tubo</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_4">
                <property name="enabled">
@@ -696,34 +659,81 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="suporte_checkBox">
                <property name="text">
                 <string>Suporte metálico</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="tubo_checkBox">
+               <property name="text">
+                <string>Tubo</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLineEdit" name="other_smpl_lineEdit"/>
+             </item>
+             <item row="8" column="0">
               <widget class="QCheckBox" name="platina_checkBox">
                <property name="text">
                 <string>Platina</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="9" column="0">
               <widget class="QCheckBox" name="othersmpl_checkBox">
                <property name="text">
                 <string>Outra</string>
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QLineEdit" name="other_smpl_lineEdit"/>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="cela_checkBox">
+               <property name="text">
+                <string>Cela</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="cubeta_checkBox">
+               <property name="text">
+                <string>Cubeta</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="0">
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="0" column="3">
            <widget class="QFrame" name="frame_15">
             <property name="maximumSize">
              <size>
@@ -742,16 +752,16 @@
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="3" column="0">
-              <widget class="QCheckBox" name="xefosfor_checkBox">
-               <property name="text">
-                <string>Xe pulsada - Fosforímetro</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
               <widget class="QCheckBox" name="xetcspc_checkBox">
                <property name="text">
                 <string>Xe pulsada - TCSPC</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="xefosfor_checkBox">
+               <property name="text">
+                <string>Xe pulsada - Fosforímetro</string>
                </property>
               </widget>
              </item>
@@ -776,13 +786,6 @@
               </widget>
              </item>
              <item row="5" column="0">
-              <widget class="QCheckBox" name="spectraled_checkBox">
-               <property name="text">
-                <string>Spectraled (s)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
               <widget class="QCheckBox" name="nanoled_checkBox">
                <property name="text">
                 <string>Nanoled (s)</string>
@@ -790,36 +793,75 @@
               </widget>
              </item>
              <item row="6" column="0">
+              <widget class="QCheckBox" name="spectraled_checkBox">
+               <property name="text">
+                <string>Spectraled (s)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
               <widget class="QCheckBox" name="laser_checkBox">
                <property name="text">
                 <string>Laser (s)</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="0">
               <widget class="QCheckBox" name="otheranaly_checkBox">
                <property name="text">
                 <string>Outras (s)</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
+             <item row="7" column="1">
               <widget class="QLineEdit" name="laser_lineEdit"/>
              </item>
-             <item row="5" column="1">
+             <item row="6" column="1">
               <widget class="QLineEdit" name="spectraled_lineEdit"/>
              </item>
-             <item row="4" column="1">
+             <item row="5" column="1">
               <widget class="QLineEdit" name="nanoled_lineEdit"/>
              </item>
-             <item row="7" column="1">
+             <item row="8" column="1">
               <widget class="QLineEdit" name="otheranaly_lineEdit"/>
+             </item>
+             <item row="2" column="0">
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="9" column="0">
+              <spacer name="verticalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="0" column="4">
            <widget class="QFrame" name="frame_16">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -836,46 +878,7 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="laser_power_lineEdit">
-               <property name="maximumSize">
-                <size>
-                 <width>80</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="text">
-                <string>Fim</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QTimeEdit" name="fonte_stop_timeEdit"/>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_9">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Potência (mW)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0" colspan="2">
+             <item row="0" column="0" colspan="3">
               <widget class="QLabel" name="label_6">
                <property name="enabled">
                 <bool>true</bool>
@@ -898,41 +901,123 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QTimeEdit" name="fonte_start_timeEdit"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_10">
-               <property name="text">
-                <string>Início</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="laser532_checkBox">
-               <property name="text">
-                <string>532 nm</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="laser785_checkBox">
+              <widget class="QCheckBox" name="exc_laser1_checkBox">
                <property name="text">
-                <string>785 nm</string>
+                <string>Laser 1</string>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QCheckBox" name="laser633_checkBox">
+              <widget class="QLineEdit" name="exc_laser1_lineEdit"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QTimeEdit" name="exc_laser1_ini_timeEdit"/>
+             </item>
+             <item row="1" column="3">
+              <widget class="QTimeEdit" name="exc_laser1_fin_timeEdit"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_23">
                <property name="text">
-                <string>633 nm</string>
+                <string>Potência laser 1</string>
                </property>
               </widget>
              </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="laser1_power_lineEdit"/>
+             </item>
              <item row="3" column="0">
+              <widget class="QCheckBox" name="exc_laser2_checkBox">
+               <property name="text">
+                <string>Laser 2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="exc_laser2_lineEdit"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QTimeEdit" name="exc_laser2_ini_timeEdit"/>
+             </item>
+             <item row="3" column="3">
+              <widget class="QTimeEdit" name="exc_laser2_fin_timeEdit"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_35">
+               <property name="text">
+                <string>Potência laser 2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="laser2_power_lineEdit"/>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="exc_laser3_checkBox">
+               <property name="text">
+                <string>Laser 3</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="exc_laser3_lineEdit"/>
+             </item>
+             <item row="5" column="2">
+              <widget class="QTimeEdit" name="exc_laser3_ini_timeEdit"/>
+             </item>
+             <item row="5" column="3">
+              <widget class="QTimeEdit" name="exc_laser3_fin_timeEdit"/>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_36">
+               <property name="text">
+                <string>Potência laser 3</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="laser3_power_lineEdit"/>
+             </item>
+             <item row="7" column="0">
               <widget class="QCheckBox" name="xecont_checkBox">
                <property name="text">
                 <string>Xe contínua</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QTimeEdit" name="fonte_start_timeEdit"/>
+             </item>
+             <item row="7" column="2">
+              <widget class="QTimeEdit" name="fonte_stop_timeEdit"/>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Potência (mW)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="xe_power_lineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -1148,6 +1233,20 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
+             <item row="2" column="9" colspan="3">
+              <widget class="QCheckBox" name="banho_term_checkBox">
+               <property name="text">
+                <string>Banho termostático</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="8">
+              <widget class="QCheckBox" name="mfc_checkBox">
+               <property name="text">
+                <string>MFC</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="2" colspan="3">
               <widget class="QLabel" name="label_15">
                <property name="font">
@@ -1186,13 +1285,6 @@
              <item row="1" column="7" colspan="3">
               <widget class="QLineEdit" name="esf_int_solid_lineEdit"/>
              </item>
-             <item row="2" column="2" colspan="3">
-              <widget class="QCheckBox" name="fibra_checkBox">
-               <property name="text">
-                <string>Fibra ótica</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="5" colspan="3">
               <widget class="QCheckBox" name="polarizer_checkBox">
                <property name="text">
@@ -1200,31 +1292,10 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="8">
-              <widget class="QCheckBox" name="mfc_checkBox">
+             <item row="2" column="2" colspan="3">
+              <widget class="QCheckBox" name="fibra_checkBox">
                <property name="text">
-                <string>MFC</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="9" colspan="3">
-              <widget class="QCheckBox" name="banho_term_checkBox">
-               <property name="text">
-                <string>Banho termostático</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_31">
-               <property name="text">
-                <string>Criostato:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2" colspan="3">
-              <widget class="QCheckBox" name="n2_checkBox">
-               <property name="text">
-                <string>N2</string>
+                <string>Fibra ótica</string>
                </property>
               </widget>
              </item>
@@ -1235,6 +1306,20 @@
                </property>
               </widget>
              </item>
+             <item row="3" column="2" colspan="3">
+              <widget class="QCheckBox" name="n2_checkBox">
+               <property name="text">
+                <string>N2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>Criostato:</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="8" colspan="3">
               <widget class="QLabel" name="label_32">
                <property name="text">
@@ -1242,8 +1327,8 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="11">
-              <widget class="QLineEdit" name="temp_criost_lineEdit"/>
+             <item row="4" column="6" colspan="4">
+              <widget class="QLineEdit" name="peltier_temp_lineEdit"/>
              </item>
              <item row="4" column="0" colspan="3">
               <widget class="QLabel" name="label_33">
@@ -1252,8 +1337,8 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="6" colspan="4">
-              <widget class="QLineEdit" name="peltier_temp_lineEdit"/>
+             <item row="3" column="11">
+              <widget class="QLineEdit" name="temp_criost_lineEdit"/>
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_34">
@@ -1262,68 +1347,68 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1" colspan="2">
-              <widget class="QRadioButton" name="nanoled_sc_radioButton">
-               <property name="text">
-                <string>s/ circulação</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3" colspan="5">
-              <widget class="QRadioButton" name="nanoled_cc_radioButton">
-               <property name="text">
-                <string>c/ circulação</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="6">
+             <item row="7" column="0" colspan="6">
               <widget class="QCheckBox" name="linkam_aquec_checkBox">
                <property name="text">
                 <string>Linkam aquecimento --&gt; Temperatura(s):</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="6" colspan="3">
+             <item row="7" column="6" colspan="3">
               <widget class="QLineEdit" name="linkam_temp_lineEdit"/>
              </item>
-             <item row="6" column="10" colspan="2">
+             <item row="7" column="10" colspan="2">
               <widget class="QCheckBox" name="linkam_banho_checkBox">
                <property name="text">
                 <string>Banho</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0" colspan="6">
+             <item row="8" column="0" colspan="6">
               <widget class="QCheckBox" name="linkam_n2_checkBox">
                <property name="text">
                 <string>Linkam N2  --&gt; Temperaura(s):</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="6" colspan="3">
+             <item row="8" column="6" colspan="3">
               <widget class="QLineEdit" name="linkam_n2_temp_lineEdit"/>
              </item>
-             <item row="7" column="10" colspan="2">
-              <widget class="QCheckBox" name="linkam_n2_banho_checkBox">
-               <property name="text">
-                <string>Banho</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0" colspan="2">
+             <item row="9" column="0" colspan="2">
               <widget class="QCheckBox" name="other_acces_checkBox">
                <property name="text">
                 <string>Outro (s):</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="6" colspan="3">
+             <item row="9" column="6" colspan="3">
               <widget class="QLineEdit" name="other_acces_lineEdit"/>
+             </item>
+             <item row="8" column="10" colspan="2">
+              <widget class="QCheckBox" name="linkam_n2_banho_checkBox">
+               <property name="text">
+                <string>Banho</string>
+               </property>
+              </widget>
              </item>
              <item row="2" column="0">
               <widget class="QCheckBox" name="dewar_checkBox">
                <property name="text">
                 <string>Dewar de N2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="nanoled_sc_checkBox">
+               <property name="text">
+                <string>s/ circulação</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="7">
+              <widget class="QCheckBox" name="nanoled_cc_checkBox">
+               <property name="text">
+                <string>c/ circulação</string>
                </property>
               </widget>
              </item>

@@ -770,6 +770,20 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="imagemxy_checkBox">
+               <property name="text">
+                <string>Imagem xy</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="imagem_autofocus_checkBox">
+               <property name="text">
+                <string>Autofocus</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0">
               <spacer name="verticalSpacer_2">
                <property name="orientation">
@@ -785,20 +799,6 @@
                 </size>
                </property>
               </spacer>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="imagemxy_checkBox">
-               <property name="text">
-                <string>Imagem xy</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="imagem_autofocus_checkBox">
-               <property name="text">
-                <string>Autofocus</string>
-               </property>
-              </widget>
              </item>
              <item row="6" column="0">
               <widget class="QCheckBox" name="imagemxyz_checkBox">
@@ -827,7 +827,7 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
+             <item row="10" column="0">
               <spacer name="verticalSpacer_3">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -850,6 +850,13 @@
                </property>
                <property name="text">
                 <string>Swift</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="mosaico_checkBox">
+               <property name="text">
+                <string>mosaico</string>
                </property>
               </widget>
              </item>
@@ -1283,6 +1290,13 @@
               <widget class="QCheckBox" name="cal_si_checkBox">
                <property name="text">
                 <string>Si (520,70 cm-1)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>Hg (546,1 nm)</string>
                </property>
               </widget>
              </item>

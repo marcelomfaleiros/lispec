@@ -64,15 +64,12 @@ class Report(qtw.QWidget, Ui_Form):
         self.load_pushButton.clicked.connect(self.load_list)
 
     def load_list(self):
-        #importar users_list   
-        self.user_comboBox.clear()
-        self.technician_comboBox.clear()
+        #importar users_list    
+        self.users_file = pd.read_csv('users_list.csv')
+        self.users_list = list(self.users_file['Usuarios'])
 
-        users_file = pd.read_csv('users_list.csv')
-        users_list = list(users_file['Usuarios'])
-
-        self.user_comboBox.addItems(sorted(users_list))
-        self.technician_comboBox.addItems(sorted(users_list)) 
+        self.user_comboBox.addItems(sorted(self.users_list))
+        
 
     def write_data(self):
         date = self.calendarWidget.selectedDate().toString("dd/MM/yy")
