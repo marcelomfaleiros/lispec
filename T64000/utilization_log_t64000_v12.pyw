@@ -166,9 +166,6 @@ class Report(qtw.QWidget, Ui_Form):
         if self.swift_checkBox.isChecked():
            image_system.append(self.swift_checkBox.text())
         
-        l785_start_time = self.l785_start_timeEdit.text()
-        l785_stop_time = self.l785_stop_timeEdit.text()
-
         ini_l785_time = self.l785_start_timeEdit.text()
         fin_l785_time = self.l785_stop_timeEdit.text()
 
@@ -182,9 +179,6 @@ class Report(qtw.QWidget, Ui_Form):
 
         l785_power = self.l785_power_lineEdit.text()
 
-        l633_start_time = self.l633_start_timeEdit.text()
-        l633_stop_time = self.l633_stop_timeEdit.text()
-
         ini_l633_time = self.l633_start_timeEdit.text()
         fin_l633_time = self.l633_stop_timeEdit.text()
 
@@ -197,9 +191,6 @@ class Report(qtw.QWidget, Ui_Form):
         total_l633_time = str(horas_l633)
 
         l633_power = self.l633_power_lineEdit.text()
-
-        l532_start_time = self.l532_start_timeEdit.text()
-        l532_stop_time = self.l532_stop_timeEdit.text()
 
         ini_l532_time = self.l532_start_timeEdit.text()
         fin_l532_time = self.l532_stop_timeEdit.text()

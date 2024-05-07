@@ -13,9 +13,6 @@ class Report(qtw.QWidget, Ui_Form):
        
     ''' 
 
-    advisors_file = pd.read_csv('advisors_list.csv')
-    advisors_list = list(advisors_file['Orientador'])
-    
     file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
                    "Humidade", "Usuário", "Status do usuário",
                    "Orientador", "Operador", "Natureza da amostra", 
@@ -49,18 +46,22 @@ class Report(qtw.QWidget, Ui_Form):
         self.setObjectName("Relatório de Utilização")
         self.setupUi(self)
 
-        self.advisor_comboBox.addItems(self.advisors_list)
-        self.load_list()
-        self.estat_method_comboBox.addItems(self.estat_method)
-        self.abrangencia_comboBox.addItems(self.coverage)
-        self.year_comboBox.addItems(self.year_list)
-        self.month_comboBox.addItems(self.months_list)
-
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
         self.cadastro_pushButton.clicked.connect(lambda: self.cadastro('add'))
         self.exclui_pushButton.clicked.connect(lambda: self.cadastro('exclui'))
         self.load_pushButton.clicked.connect(self.load_list)
+
+        advisors_file = pd.read_csv('advisors_list.csv')
+        self.advisors_list = list(advisors_file['Orientador'])
+        self.advisor_comboBox.addItems(self.advisors_list)
+
+        self.estat_method_comboBox.addItems(self.estat_method)
+        self.abrangencia_comboBox.addItems(self.coverage)
+        self.year_comboBox.addItems(self.year_list)
+        self.month_comboBox.addItems(self.months_list)   
+
+        self.load_list()     
 
     def load_list(self):
         #importar users_list   
@@ -112,7 +113,12 @@ class Report(qtw.QWidget, Ui_Form):
            user_status = "N/C" 
 
         ini_time = self.start_timeEdit.text()
-        fin_time = self.stop_timeEdit.text()         
+        fin_time = self.stop_timeEdit.text()    
+        if fin_time == "00:00":
+           fin_time = "24:00"
+        else:
+           fin_time = fin_time
+
         hora_ini = int(ini_time[:2])
         hora_fin = int(fin_time[:2])
         min_ini = int(ini_time[3:])/60
@@ -164,11 +170,12 @@ class Report(qtw.QWidget, Ui_Form):
         if self.mosaico_checkBox.isChecked():
            image_system.append(self.mosaico_checkBox.text())
 
-        laser_start_time = self.laser_start_timeEdit.text()
-        laser_stop_time = self.laser_stop_timeEdit.text()
-
         ini_laser_time = self.laser_start_timeEdit.text()
         fin_laser_time = self.laser_stop_timeEdit.text()
+        if fin_laser_time == "00:00":
+           fin_laser_time = "24:00"
+        else:
+           fin_laser_time = fin_laser_time
 
         hora_laser_ini = int(ini_laser_time[:2])
         hora_laser_fin = int(fin_laser_time[:2])
@@ -229,8 +236,8 @@ class Report(qtw.QWidget, Ui_Form):
 
         self.data = [date, ini_time, fin_time, total_time, temp, humid, user, 
                      user_status, advisor, technician, smpl_nature, smpl_number,
-                     smpl_description, spec_acq, image_system, laser_start_time,
-                     laser_stop_time, total_laser_time, laser_power, filters, 
+                     smpl_description, spec_acq, image_system, ini_laser_time,
+                     fin_laser_time, total_laser_time, laser_power, filters, 
                      objetivas, cal, linkam, Tstart, Tstop, observations, problems]
               
     def save(self):
@@ -247,7 +254,6 @@ class Report(qtw.QWidget, Ui_Form):
             with open(month_file_label, 'a', newline='', encoding='utf8') as mf:
                 write = csv.writer(mf)
                 write.writerow(self.file_header)
-                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(year_file_label):
@@ -258,7 +264,6 @@ class Report(qtw.QWidget, Ui_Form):
             with open(year_file_label, 'a', newline='', encoding='utf8') as yf:
                 write = csv.writer(yf)
                 write.writerow(self.file_header)
-                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(global_file_label):
@@ -269,7 +274,6 @@ class Report(qtw.QWidget, Ui_Form):
             with open(global_file_label, 'a', newline='', encoding='utf8') as gf:
                 write = csv.writer(gf)
                 write.writerow(self.file_header)
-                write.writerow("")
                 write.writerow(self.data)
 
         self.salvar_label.setText('OK - Arquivo salvo')
@@ -328,8 +332,6 @@ class Report(qtw.QWidget, Ui_Form):
                 array_orientador = data[data.Orientador == n]
                 parcial_time = round(array_orientador['Tempo total (h)'].sum(), 1)
                 object_arr += n + '     ' + str(parcial_time) + ' h \n\n'  
-
-                print(object_arr)
                 
           self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
                                     object_arr)
