@@ -256,10 +256,10 @@ class Report(qtw.QWidget, Ui_Form):
 
         self.data = [date, ini_time, fin_time, total_time, temp, humid, user, 
                      user_status, advisor, technician, smpl_nature, smpl_number,
-                     smpl_description, acq_modes, image_system, l785_start_time,
-                     l785_stop_time, total_l785_time, l785_power, l633_start_time,
-                     l633_stop_time, total_l633_time, l633_power, l532_start_time,
-                     l532_stop_time, total_l532_time, l532_power, filters, 
+                     smpl_description, acq_modes, image_system, ini_l785_time,
+                     fin_l785_time, total_l785_time, l785_power, ini_l633_time,
+                     fin_l633_time, total_l633_time, l633_power, ini_l532_time,
+                     fin_l532_time, total_l532_time, l532_power, filters, 
                      objetivas, cal, linkam, Tstart, Tstop, observations, problems]
               
     def save(self):

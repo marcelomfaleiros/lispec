@@ -2,13 +2,11 @@
 # revisão 19/04/2024
 
 import os
-from PyQt5 import QtWidgets as qtw
-from utilization_log_t64000_intrfc import Ui_Form
+from PyQt5 import QtWidgets, uic
 import csv
 import pandas as pd
-from time import sleep
 
-class Report(qtw.QWidget, Ui_Form):
+class Report(QtWidgets.QWidget):
         
     '''
        
@@ -26,7 +24,7 @@ class Report(qtw.QWidget, Ui_Form):
                    "Temperatura inicial", "Temperatura final", "Observações",
                    "Problema no instrumento"]
     
-    estat_method = ["Orientador", "Usuário", "Natureza da amostra", "Laser"]
+    estat_method = ["Advisor", "Usuer", "Sample nature", "Laser"]
 
     year_list = ["2024", "2025", "2026", "2027", "2028", "2029", "2030",
                 "2031", "2032", "2033", "2034", "2035", "2036", "2037",
@@ -39,15 +37,14 @@ class Report(qtw.QWidget, Ui_Form):
     months_list = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"]
     
-    coverage = ["Mensal", "Anual", "Global"]
+    coverage = ["Month", "Year", "Global"]
     
     data = []
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setObjectName("Relatório de Utilização")
-        self.setupUi(self)      
+        uic.loadUi('utilization_log_t64000_intrfc_v12.ui', self)     
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
@@ -108,7 +105,7 @@ class Report(qtw.QWidget, Ui_Form):
            advisor = "N/C"
         elif self.ca_checkBox.isChecked():
            user_status = self.ca_checkBox.text()
-           advisor = "N/C"
+           advisor = "CA"
         elif self.treinamento_checkBox.isChecked():
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
@@ -116,7 +113,12 @@ class Report(qtw.QWidget, Ui_Form):
            user_status = "N/C" 
 
         ini_time = self.start_timeEdit.text()
-        fin_time = self.stop_timeEdit.text()         
+        fin_time = self.stop_timeEdit.text()  
+        if fin_time == "00:00":
+           fin_time = "24:00"
+        else:
+           fin_time = fin_time
+
         hora_ini = int(ini_time[:2])
         hora_fin = int(fin_time[:2])
         min_ini = int(ini_time[3:])/60
@@ -210,8 +212,6 @@ class Report(qtw.QWidget, Ui_Form):
            filters.append(self.filtro01_checkBox.text())
         if self.filtro1_checkBox.isChecked():
            filters.append(self.filtro1_checkBox.text())
-        if self.filtro5_checkBox.isChecked():
-           filters.append(self.filtro5_checkBox.text())
         if self.filtro10_checkBox.isChecked():
            filters.append(self.filtro10_checkBox.text())
         if self.filtro25_checkBox.isChecked():
@@ -227,8 +227,6 @@ class Report(qtw.QWidget, Ui_Form):
         if self.objetiva50x_checkBox.isChecked():
            objetivas.append(self.objetiva50x_checkBox.text())
         if self.objetiva50xlwd_checkBox.isChecked():
-           objetivas.append(self.objetiva50xfluor_checkBox.text())
-        if self.objetiva50xfluor_checkBox.isChecked():
            objetivas.append(self.objetiva50xlwd_checkBox.text())
         if self.objetiva100x_checkBox.isChecked():
            objetivas.append(self.objetiva100x_checkBox.text())
@@ -260,10 +258,10 @@ class Report(qtw.QWidget, Ui_Form):
 
         self.data = [date, ini_time, fin_time, total_time, temp, humid, user, 
                      user_status, advisor, technician, smpl_nature, smpl_number,
-                     smpl_description, acq_modes, image_system, l785_start_time,
-                     l785_stop_time, total_l785_time, l785_power, l633_start_time,
-                     l633_stop_time, total_l633_time, l633_power, l532_start_time,
-                     l532_stop_time, total_l532_time, l532_power, filters, 
+                     smpl_description, acq_modes, image_system, ini_l785_time,
+                     fin_l785_time, total_l785_time, l785_power, ini_l633_time,
+                     fin_l633_time, total_l633_time, l633_power, ini_l532_time,
+                     fin_l532_time, total_l532_time, l532_power, filters, 
                      objetivas, cal, linkam, Tstart, Tstop, observations, problems]
               
     def save(self):
@@ -305,11 +303,8 @@ class Report(qtw.QWidget, Ui_Form):
                 write.writerow("")
                 write.writerow(self.data)
 
-        for i in range(10000):
-           self.salvar_label.setText('OK - Arquivo salvo!')
-        self.salvar_label.setText('')
-           
-
+        self.salvar_label.setText('OK - File saved!')
+         
         '''with open('raw_data_log.txt', 'a') as tf:
             tf.write('\r')
             tf.write(str(self.data) + '\r')'''   
@@ -324,9 +319,9 @@ class Report(qtw.QWidget, Ui_Form):
        #file to be opened
        if coverage == 'Global':
           file = 'T64000 - data_log.csv'
-       elif coverage == 'Anual':
+       elif coverage == 'Year':
           file = 'T64000 - ' + year + '_data_log.csv'
-       elif coverage == 'Mensal':
+       elif coverage == 'Month':
           file = 'T64000 - ' + month + year[2:] + '_data_log.csv'
 
        #read csv file
@@ -362,7 +357,7 @@ class Report(qtw.QWidget, Ui_Form):
                                     'Tempo 532 nm total: ' + str(round(total_time_532, 1)) + 'h\n\n' +
                                     object_str_532)
       
-       elif search_method == 'Orientador':
+       elif search_method == 'Advisor':
           total_time = data['Tempo total (h)'].sum()
 
           search_object = data['Orientador']        
@@ -393,7 +388,7 @@ class Report(qtw.QWidget, Ui_Form):
           users.to_csv('t64000_users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
-    app = qtw.QApplication([])
+    app = QtWidgets.QApplication([])
     tela = Report()
     tela.show()
     app.exec_()

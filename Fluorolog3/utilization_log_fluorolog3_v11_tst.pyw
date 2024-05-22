@@ -2,11 +2,13 @@
 # revisão 19/04/2024
 
 import os
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets as qtw
+from utilization_log_fluorolog3_intrfc import Ui_Form
 import csv
 import pandas as pd
+from time import sleep
 
-class Report(QtWidgets.QWidget):
+class Report(qtw.QWidget, Ui_Form):
         
     '''
        
@@ -29,7 +31,8 @@ class Report(QtWidgets.QWidget):
                    "Peltier", "Nanoled", "Linkam aquecimento",
                    "Linkam N2", "Observações", "Problema no instrumento"]
     
-    estat_method = ["Advisor", "User", "Sample nature", "Laser"]
+    estat_method = ["Orientador", "Usuário", "Natureza da amostra",
+                    "Fonte de excitação", "Instrumento"]
 
     year_list = ["2024", "2025", "2026", "2027", "2028", "2029", "2030",
                 "2031", "2032", "2033", "2034", "2035", "2036", "2037",
@@ -42,14 +45,15 @@ class Report(QtWidgets.QWidget):
     months_list = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"]
     
-    coverage = ["Month", "Year", "Global"]
+    coverage = ["Mensal", "Anual", "Global"]
     
     data = []
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        uic.loadUi('utilization_log_fluorolog3_intrfc_v11.ui', self)
+        self.setObjectName("Relatório de Utilização")
+        self.setupUi(self)
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
@@ -110,7 +114,7 @@ class Report(QtWidgets.QWidget):
            advisor = "N/C"
         elif self.ca_checkBox.isChecked():
            user_status = self.ca_checkBox.text()
-           advisor = "CA"
+           advisor = "N/C"
         elif self.treinamento_checkBox.isChecked():
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
@@ -400,33 +404,51 @@ class Report(QtWidgets.QWidget):
        #file to be opened
        if coverage == 'Global':
           file = 'Fluorolog3 - data_log.csv'
-       elif coverage == 'Year':
+       elif coverage == 'Anual':
           file = 'Fluorolog3 - ' + year + '_data_log.csv'
-       elif coverage == 'Month':
+       elif coverage == 'Mensal':
           file = 'Fluorolog3 - ' + month + year[2:] + '_data_log.csv'
 
        #read csv file
        data = pd.read_csv(file)
 
        if search_method == 'Fonte de excitação':
-          total_time = data['Tempo Exc (h)'].sum()
+          total_time_xe = data['Tempo Xe (h)'].sum()
+          total_time_laser1 = data['Tempo Laser 1 (h)'].sum()
+          total_time_laser2 = data['Tempo Laser 2 (h)'].sum()
+          total_time_laser3 = data['Tempo Laser 3 (h)'].sum()
 
-          search_object = data['Advisor']    
+          search_object = data['Orientador']    
           search_object = list(set(search_object))
           search_object = sorted(search_object)
 
-          object_arr = ''
+          object_str_xe = ''
+          object_str_laser1 = ''
+          object_str_laser2 = ''
+          object_str_laser3 = ''
 
           for n in search_object:
              if n in self.advisors_list:
                 array_orientador = data[data.Orientador == n]
-                parcial_time = round(array_orientador['Tempo Exc (h)'].sum(), 1)
-                object_arr += n + ' ' + str(parcial_time) + '\n\n'  
+                parcial_time_xe = round(array_orientador['Tempo Xe (h)'].sum(), 1)
+                parcial_time_laser1 = round(array_orientador['Tempo Laser 1 (h)'].sum(), 1)
+                parcial_time_laser2 = round(array_orientador['Tempo Laser 2 (h)'].sum(), 1)
+                parcial_time_laser3 = round(array_orientador['Tempo Laser 3 (h)'].sum(), 1)
+                object_str_xe += n + ' ' + str(parcial_time_xe) + '\n' 
+                object_str_laser1 += n + ' ' + str(parcial_time_laser1) + '\n' 
+                object_str_laser2 += n + ' ' + str(parcial_time_laser2) + '\n'
+                object_str_laser3 += n + ' ' + str(parcial_time_laser3) + '\n'
                          
-          self.report_label.setText('Tempo Exc (h): ' + str(round(total_time, 1)) + 'h\n\n' +
-                                    object_arr)
+          self.report_label.setText('Tempo Xe total: ' + str(round(total_time_xe, 1)) + 'h\n\n' +
+                                    object_str_xe + '\n' +
+                                    'Tempo Laser1 total: ' + str(round(total_time_laser1, 1)) + 'h\n\n' +
+                                    object_str_laser1 + '\n' +
+                                    'Tempo Laser2 total: ' + str(round(total_time_laser2, 1)) + 'h\n\n' +
+                                    object_str_laser2 + '\n' +
+                                    'Tempo Laser3 total: ' + str(round(total_time_laser3, 1)) + 'h\n\n' +
+                                    object_str_laser3)
       
-       elif search_method == 'Advisor':
+       elif search_method == 'Orientador':
           total_time = data['Tempo total (h)'].sum()
 
           search_object = data['Orientador']       
@@ -444,6 +466,22 @@ class Report(QtWidgets.QWidget):
           self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
                                     object_arr)
           
+       '''elif search_method == 'Instrumento':
+          search_object = data['Problema no instrumento']       
+          search_object = list(set(search_object))
+          search_object = sorted(search_object)
+
+          object_arr = ''
+
+          for n in search_object:
+             if n in self.advisors_list:
+                array_orientador = data[data.Orientador == n]
+                parcial_time = round(array_orientador['Tempo total (h)'].sum(), 1)
+                object_arr += n + '     ' + str(parcial_time) + ' h \n\n'  
+                
+          self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
+                                    object_arr)'''
+          
     def cadastro(self, action=str):  
        user = self.user_lineEdit.text()
        if action == 'add':         
@@ -457,7 +495,7 @@ class Report(QtWidgets.QWidget):
           users.to_csv('fluorolog3_users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
+    app = qtw.QApplication([])
     tela = Report()
     tela.show()
     app.exec_()

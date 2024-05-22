@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>1042</width>
-    <height>937</height>
+    <height>868</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Registro de Utilização - Fluorolog3</string>
+   <string>Utilization log - T64000</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -21,7 +21,7 @@
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Registro de Utilização</string>
+       <string>Utilization log</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
@@ -86,7 +86,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Operador</string>
+                <string>Operator</string>
                </property>
               </widget>
              </item>
@@ -106,14 +106,14 @@
                 </font>
                </property>
                <property name="text">
-                <string>Usuário</string>
+                <string>User</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
               <widget class="QCheckBox" name="mestrado_checkBox">
                <property name="text">
-                <string>Mestrado</string>
+                <string>Master</string>
                </property>
               </widget>
              </item>
@@ -134,28 +134,28 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="posdoc_checkBox">
                <property name="text">
-                <string>Pós-Doc</string>
+                <string>PosDoc</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="pesquisador_checkBox">
                <property name="text">
-                <string>Pesquisador</string>
+                <string>Researcher</string>
                </property>
               </widget>
              </item>
              <item row="2" column="2">
               <widget class="QCheckBox" name="doutorado_checkBox">
                <property name="text">
-                <string>Doutorado</string>
+                <string>PhD</string>
                </property>
               </widget>
              </item>
              <item row="4" column="0">
               <widget class="QCheckBox" name="technician_checkBox">
                <property name="text">
-                <string>Técnico</string>
+                <string>Technician</string>
                </property>
               </widget>
              </item>
@@ -176,14 +176,14 @@
                 </font>
                </property>
                <property name="text">
-                <string>Orientador</string>
+                <string>Advisor</string>
                </property>
               </widget>
              </item>
              <item row="4" column="2">
               <widget class="QCheckBox" name="test_checkBox">
                <property name="text">
-                <string>Teste</string>
+                <string>Test</string>
                </property>
               </widget>
              </item>
@@ -210,7 +210,7 @@
              <item row="5" column="2">
               <widget class="QCheckBox" name="treinamento_checkBox">
                <property name="text">
-                <string>Treinamento</string>
+                <string>Training</string>
                </property>
               </widget>
              </item>
@@ -280,21 +280,21 @@
                 </font>
                </property>
                <property name="text">
-                <string>Período</string>
+                <string>Time range</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_12">
                <property name="text">
-                <string>Início</string>
+                <string>Start</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_13">
                <property name="text">
-                <string>Fim</string>
+                <string>Stop</string>
                </property>
               </widget>
              </item>
@@ -321,14 +321,14 @@
              <item row="6" column="0">
               <widget class="QLabel" name="label_16">
                <property name="text">
-                <string>Temperatura (ºC)</string>
+                <string>Temperature (ºC)</string>
                </property>
               </widget>
              </item>
              <item row="7" column="0">
               <widget class="QLabel" name="label_17">
                <property name="text">
-                <string>Umidade (%)</string>
+                <string>Humidity (%)</string>
                </property>
               </widget>
              </item>
@@ -348,7 +348,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Condições da sala</string>
+                <string>Room conditions</string>
                </property>
               </widget>
              </item>
@@ -410,7 +410,7 @@
          <property name="minimumSize">
           <size>
            <width>1000</width>
-           <height>0</height>
+           <height>220</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -428,13 +428,13 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout_10">
-          <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
            <widget class="QFrame" name="frame_11">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>0</height>
+              <width>300</width>
+              <height>200</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -452,8 +452,81 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="gel_checkBox">
+               <property name="text">
+                <string>Gel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="cachimbo_checkBox">
+               <property name="text">
+                <string>Pipe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="outra_amostra_checkBox">
+               <property name="text">
+                <string>Other</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="2">
+              <widget class="QTextEdit" name="outra_amostra_textEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="powder_checkBox">
+               <property name="text">
+                <string>Powder</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="Line" name="line_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="text">
+                <string>Solid:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="Line" name="line_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="Line" name="line">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_22">
+               <property name="text">
+                <string>Líquido:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
               <widget class="QLabel" name="label_2">
                <property name="font">
                 <font>
@@ -463,60 +536,26 @@
                 </font>
                </property>
                <property name="text">
-                <string>Natureza da amostra</string>
+                <string>Sample nature</string>
                </property>
               </widget>
              </item>
-             <item>
-              <spacer name="verticalSpacer_8">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_21">
-               <property name="text">
-                <string>Sólido:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="powder_checkBox">
-               <property name="text">
-                <string>Pó</string>
-               </property>
-              </widget>
-             </item>
-             <item>
+             <item row="4" column="1">
               <widget class="QCheckBox" name="piece_checkBox">
                <property name="text">
-                <string>Peça</string>
+                <string>Piece</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="Line" name="line_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="liquido_checkBox">
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="al_checkBox">
                <property name="text">
-                <string>Líquido</string>
+                <string>Aluminum pan</string>
                </property>
               </widget>
              </item>
-             <item>
-              <spacer name="verticalSpacer_5">
+             <item row="2" column="0">
+              <spacer name="verticalSpacer_8">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -531,17 +570,11 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item>
            <widget class="QFrame" name="frame_12">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="maximumSize">
              <size>
-              <width>220</width>
+              <width>350</width>
               <height>16777215</height>
              </size>
             </property>
@@ -571,7 +604,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Número de amostras</string>
+                <string>Number of samples</string>
                </property>
               </widget>
              </item>
@@ -595,7 +628,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Descrição da amostra</string>
+                <string>Sample description</string>
                </property>
               </widget>
              </item>
@@ -618,12 +651,12 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item>
            <widget class="QFrame" name="frame_14">
             <property name="maximumSize">
              <size>
               <width>170</width>
-              <height>16777215</height>
+              <height>200</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -655,70 +688,49 @@
                 </font>
                </property>
                <property name="text">
-                <string>Porta amostras</string>
+                <string>Acquisition modes</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="suporte_checkBox">
-               <property name="text">
-                <string>Suporte metálico</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="tubo_checkBox">
-               <property name="text">
-                <string>Tubo</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLineEdit" name="other_smpl_lineEdit"/>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="platina_checkBox">
-               <property name="text">
-                <string>Platina</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="othersmpl_checkBox">
-               <property name="text">
-                <string>Outra</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="cela_checkBox">
-               <property name="text">
-                <string>Cela</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="cubeta_checkBox">
-               <property name="text">
-                <string>Cubeta</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <spacer name="verticalSpacer_11">
+             <item row="1" column="0">
+              <spacer name="verticalSpacer">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>20</height>
                 </size>
                </property>
               </spacer>
              </item>
              <item row="3" column="0">
-              <spacer name="verticalSpacer">
+              <widget class="QCheckBox" name="microscope_checkBox">
+               <property name="text">
+                <string>Microscope</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="single_checkBox">
+               <property name="text">
+                <string>Single (from 100 cm-1)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="macro_checkBox">
+               <property name="text">
+                <string>Macro</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <spacer name="verticalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -730,14 +742,21 @@
                </property>
               </spacer>
              </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="triple_checkBox">
+               <property name="text">
+                <string>Triple (from 20 cm-1)</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item>
            <widget class="QFrame" name="frame_15">
             <property name="maximumSize">
              <size>
-              <width>350</width>
+              <width>200</width>
               <height>16777215</height>
              </size>
             </property>
@@ -751,17 +770,40 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="xetcspc_checkBox">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="imagemxy_checkBox">
                <property name="text">
-                <string>Xe pulsada - TCSPC</string>
+                <string>xy image</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="xefosfor_checkBox">
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="imagem_autofocus_checkBox">
                <property name="text">
-                <string>Xe pulsada - Fosforímetro</string>
+                <string>Autofocus</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="imagemxyz_checkBox">
+               <property name="text">
+                <string>xy and z Image (3D)</string>
                </property>
               </widget>
              </item>
@@ -781,90 +823,78 @@
                 </font>
                </property>
                <property name="text">
-                <string>Análises resolvidas no tempo</string>
+                <string>Image system</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="nanoled_checkBox">
-               <property name="text">
-                <string>Nanoled (s)</string>
+             <item row="10" column="0">
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="spectraled_checkBox">
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="swift_checkBox">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
-                <string>Spectraled (s)</string>
+                <string>Swift</string>
                </property>
               </widget>
              </item>
              <item row="7" column="0">
-              <widget class="QCheckBox" name="laser_checkBox">
+              <widget class="QCheckBox" name="mosaico_checkBox">
                <property name="text">
-                <string>Laser (s)</string>
+                <string>mosaic</string>
                </property>
               </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="otheranaly_checkBox">
-               <property name="text">
-                <string>Outras (s)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QLineEdit" name="laser_lineEdit"/>
-             </item>
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="spectraled_lineEdit"/>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="nanoled_lineEdit"/>
-             </item>
-             <item row="8" column="1">
-              <widget class="QLineEdit" name="otheranaly_lineEdit"/>
-             </item>
-             <item row="2" column="0">
-              <spacer name="verticalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="9" column="0">
-              <spacer name="verticalSpacer_9">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="4">
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_5">
+         <property name="minimumSize">
+          <size>
+           <width>1000</width>
+           <height>180</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 197);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
            <widget class="QFrame" name="frame_16">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>250</width>
               <height>16777215</height>
              </size>
             </property>
@@ -878,7 +908,49 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="0" colspan="3">
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>532 nm</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QTimeEdit" name="l633_stop_timeEdit"/>
+             </item>
+             <item row="6" column="1">
+              <widget class="QTimeEdit" name="l532_start_timeEdit"/>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="l633_power_lineEdit"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Power 785 (mW)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>633 nm</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="2">
               <widget class="QLabel" name="label_6">
                <property name="enabled">
                 <bool>true</bool>
@@ -897,122 +969,61 @@
                 </font>
                </property>
                <property name="text">
-                <string>Fontes de excitação</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="exc_laser1_checkBox">
-               <property name="text">
-                <string>Laser 1</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="exc_laser1_lineEdit"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QTimeEdit" name="exc_laser1_ini_timeEdit"/>
-             </item>
-             <item row="1" column="3">
-              <widget class="QTimeEdit" name="exc_laser1_fin_timeEdit"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="text">
-                <string>Potência laser 1</string>
+                <string>Laser</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="laser1_power_lineEdit"/>
+              <widget class="QTimeEdit" name="l785_start_timeEdit"/>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="exc_laser2_checkBox">
+             <item row="7" column="0">
+              <spacer name="verticalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="0">
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_10">
                <property name="text">
-                <string>Laser 2</string>
+                <string>785 nm</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="exc_laser2_lineEdit"/>
+             <item row="6" column="2">
+              <widget class="QTimeEdit" name="l532_stop_timeEdit"/>
              </item>
-             <item row="3" column="2">
-              <widget class="QTimeEdit" name="exc_laser2_ini_timeEdit"/>
-             </item>
-             <item row="3" column="3">
-              <widget class="QTimeEdit" name="exc_laser2_fin_timeEdit"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_35">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_32">
                <property name="text">
-                <string>Potência laser 2</string>
+                <string>Power 633 (mW)</string>
                </property>
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QLineEdit" name="laser2_power_lineEdit"/>
+              <widget class="QTimeEdit" name="l633_start_timeEdit"/>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="exc_laser3_checkBox">
-               <property name="text">
-                <string>Laser 3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="exc_laser3_lineEdit"/>
-             </item>
-             <item row="5" column="2">
-              <widget class="QTimeEdit" name="exc_laser3_ini_timeEdit"/>
-             </item>
-             <item row="5" column="3">
-              <widget class="QTimeEdit" name="exc_laser3_fin_timeEdit"/>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_36">
-               <property name="text">
-                <string>Potência laser 3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="laser3_power_lineEdit"/>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="xecont_checkBox">
-               <property name="text">
-                <string>Xe contínua</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QTimeEdit" name="fonte_start_timeEdit"/>
-             </item>
-             <item row="7" column="2">
-              <widget class="QTimeEdit" name="fonte_stop_timeEdit"/>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_9">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Potência (mW)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QLineEdit" name="xe_power_lineEdit">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="l785_power_lineEdit">
                <property name="maximumSize">
                 <size>
                  <width>80</width>
@@ -1021,111 +1032,27 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_5">
-         <property name="minimumSize">
-          <size>
-           <width>1000</width>
-           <height>220</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 197);</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QFrame" name="frame">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>100</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <item>
-              <widget class="QLabel" name="label_7">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
+             <item row="2" column="2">
+              <widget class="QTimeEdit" name="l785_stop_timeEdit"/>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_33">
                <property name="text">
-                <string>Filtros (nm)</string>
+                <string>Power 532 (mW)</string>
                </property>
               </widget>
              </item>
-             <item>
-              <spacer name="verticalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="filtro_lineEdit"/>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="l532_power_lineEdit"/>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QFrame" name="frame_9">
+          <item>
+           <widget class="QFrame" name="frame">
             <property name="minimumSize">
              <size>
-              <width>250</width>
+              <width>80</width>
               <height>0</height>
              </size>
             </property>
@@ -1144,49 +1071,9 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QGridLayout" name="gridLayout_9">
-             <item row="4" column="2">
-              <widget class="QLineEdit" name="emis_lineEdit"/>
-             </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QCheckBox" name="emi_checkBox">
-               <property name="text">
-                <string>Monocromador de emissão</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0" colspan="2">
-              <widget class="QCheckBox" name="ccd_grade_checkBox">
-               <property name="text">
-                <string>CCD: Grade/lambda</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QLineEdit" name="ccd_grade_lineEdit"/>
-             </item>
-             <item row="3" column="0" colspan="3">
-              <widget class="QCheckBox" name="exc_checkBox">
-               <property name="text">
-                <string>Monocromador de excitação (467.2 nm)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>37</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="label_14">
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_7">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1195,31 +1082,67 @@
                 </font>
                </property>
                <property name="text">
-                <string>Calibração</string>
+                <string>Filters</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item>
+              <widget class="QCheckBox" name="filtro01_checkBox">
+               <property name="text">
+                <string>0.1%</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro1_checkBox">
+               <property name="text">
+                <string>1%</string>
                </property>
-              </spacer>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro5_checkBox">
+               <property name="text">
+                <string>5%</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro10_checkBox">
+               <property name="text">
+                <string>10%</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro25_checkBox">
+               <property name="text">
+                <string>25%</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro50_checkBox">
+               <property name="text">
+                <string>50%</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="filtro100_checkBox">
+               <property name="text">
+                <string>100%</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2">
-           <widget class="QFrame" name="frame_21">
+          <item>
+           <widget class="QFrame" name="frame_17">
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>100</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1233,22 +1156,8 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="2" column="9" colspan="3">
-              <widget class="QCheckBox" name="banho_term_checkBox">
-               <property name="text">
-                <string>Banho termostático</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="8">
-              <widget class="QCheckBox" name="mfc_checkBox">
-               <property name="text">
-                <string>MFC</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2" colspan="3">
-              <widget class="QLabel" name="label_15">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_8">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -1257,169 +1166,60 @@
                 </font>
                </property>
                <property name="text">
-                <string>Acessórios</string>
+                <string>Objetive lens</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QLabel" name="label_22">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="objetiva100x_checkBox">
                <property name="text">
-                <string>Esfera de integração:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2" colspan="2">
-              <widget class="QCheckBox" name="esf_integ_liquid_checkBox">
-               <property name="text">
-                <string>Líquido</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="4" colspan="3">
-              <widget class="QCheckBox" name="esf_int_solid_checkBox">
-               <property name="text">
-                <string>Sólido</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="7" colspan="3">
-              <widget class="QLineEdit" name="esf_int_solid_lineEdit"/>
-             </item>
-             <item row="2" column="5" colspan="3">
-              <widget class="QCheckBox" name="polarizer_checkBox">
-               <property name="text">
-                <string>Polarizador</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2" colspan="3">
-              <widget class="QCheckBox" name="fibra_checkBox">
-               <property name="text">
-                <string>Fibra ótica</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="5" colspan="3">
-              <widget class="QCheckBox" name="he_checkBox">
-               <property name="text">
-                <string>He</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2" colspan="3">
-              <widget class="QCheckBox" name="n2_checkBox">
-               <property name="text">
-                <string>N2</string>
+                <string>100x</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="label_31">
+              <widget class="QCheckBox" name="objetiva50xlwd_checkBox">
                <property name="text">
-                <string>Criostato:</string>
+                <string>50x LWD</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="8" colspan="3">
-              <widget class="QLabel" name="label_32">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="objetiva10x_checkBox">
                <property name="text">
-                <string>--&gt; Temperatura (s)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="6" colspan="4">
-              <widget class="QLineEdit" name="peltier_temp_lineEdit"/>
-             </item>
-             <item row="4" column="0" colspan="3">
-              <widget class="QLabel" name="label_33">
-               <property name="text">
-                <string>Peltier --&gt; Temperatura (s)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="11">
-              <widget class="QLineEdit" name="temp_criost_lineEdit"/>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_34">
-               <property name="text">
-                <string>Nanoled: </string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0" colspan="6">
-              <widget class="QCheckBox" name="linkam_aquec_checkBox">
-               <property name="text">
-                <string>Linkam aquecimento --&gt; Temperatura(s):</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="6" colspan="3">
-              <widget class="QLineEdit" name="linkam_temp_lineEdit"/>
-             </item>
-             <item row="7" column="10" colspan="2">
-              <widget class="QCheckBox" name="linkam_banho_checkBox">
-               <property name="text">
-                <string>Banho</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0" colspan="6">
-              <widget class="QCheckBox" name="linkam_n2_checkBox">
-               <property name="text">
-                <string>Linkam N2  --&gt; Temperaura(s):</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="6" colspan="3">
-              <widget class="QLineEdit" name="linkam_n2_temp_lineEdit"/>
-             </item>
-             <item row="9" column="0" colspan="2">
-              <widget class="QCheckBox" name="other_acces_checkBox">
-               <property name="text">
-                <string>Outro (s):</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="6" colspan="3">
-              <widget class="QLineEdit" name="other_acces_lineEdit"/>
-             </item>
-             <item row="8" column="10" colspan="2">
-              <widget class="QCheckBox" name="linkam_n2_banho_checkBox">
-               <property name="text">
-                <string>Banho</string>
+                <string>10x</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QCheckBox" name="dewar_checkBox">
+              <widget class="QCheckBox" name="objetiva50x_checkBox">
                <property name="text">
-                <string>Dewar de N2</string>
+                <string>50x</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="2">
-              <widget class="QCheckBox" name="nanoled_sc_checkBox">
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="objetiva100xlwd_checkBox">
                <property name="text">
-                <string>s/ circulação</string>
+                <string>100x LWD</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="7">
-              <widget class="QCheckBox" name="nanoled_cc_checkBox">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="objetiva50xfluor_checkBox">
                <property name="text">
-                <string>c/ circulação</string>
+                <string>50x fluor</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QFrame" name="frame_6">
+          <item>
+           <widget class="QFrame" name="frame_9">
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>250</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1432,65 +1232,215 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QLabel" name="label_8">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>0</y>
-               <width>81</width>
-               <height>16</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Detectores</string>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="pmt_uvvis_checkBox">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>20</y>
-               <width>81</width>
-               <height>17</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>PMT (UV-vis)</string>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="pmt_nir_checkBox">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>40</y>
-               <width>70</width>
-               <height>17</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>PMT (NIR)</string>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="ccd_checkBox">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>60</y>
-               <width>70</width>
-               <height>17</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>CCD</string>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Calibration</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="align_checkBox">
+               <property name="text">
+                <string>It was necessary to align the laser</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cal_checkBox">
+               <property name="text">
+                <string>Calibration was not necessary</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cal_si_checkBox">
+               <property name="text">
+                <string>Si (520,70 cm-1)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>Hg (546,1 nm)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cal_outro_checkBox">
+               <property name="text">
+                <string>Other</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextEdit" name="cal_outro_textEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_21">
+            <property name="maximumSize">
+             <size>
+              <width>380</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_9">
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="linkam_stopT_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>100</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_15">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Linkam oven</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="4" column="1">
+              <spacer name="verticalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Temperature range (ºC)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="linkam_startT_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_34">
+               <property name="text">
+                <string>Gases</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="2">
+              <widget class="QLineEdit" name="gases_lineEdit"/>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
@@ -1517,7 +1467,7 @@
           <item row="1" column="0">
            <widget class="QCheckBox" name="inst_probl_checkBox">
             <property name="text">
-             <string>Problema no instrumento</string>
+             <string>Inastrument problem</string>
             </property>
            </widget>
           </item>
@@ -1569,7 +1519,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Observações:</string>
+             <string>Observations:</string>
             </property>
            </widget>
           </item>
@@ -1592,7 +1542,7 @@
              <string notr="true">background-color: rgb(85, 255, 0);</string>
             </property>
             <property name="text">
-             <string>Salvar</string>
+             <string>Save</string>
             </property>
            </widget>
           </item>
@@ -1617,7 +1567,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Estatísticas</string>
+       <string>Statistics</string>
       </attribute>
       <widget class="QComboBox" name="estat_method_comboBox">
        <property name="geometry">
@@ -1652,7 +1602,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Método de busca</string>
+        <string>Search method</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_27">
@@ -1678,7 +1628,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Abrangência</string>
+        <string>Coverage</string>
        </property>
       </widget>
       <widget class="QComboBox" name="abrangencia_comboBox">
@@ -1752,7 +1702,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Ano</string>
+        <string>Year</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_29">
@@ -1778,7 +1728,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Mês</string>
+        <string>Month</string>
        </property>
       </widget>
       <widget class="QPushButton" name="report_pushButton">
@@ -1801,7 +1751,7 @@
         <string notr="true">background-color: rgb(0, 255, 127);</string>
        </property>
        <property name="text">
-        <string>Gerar relatório</string>
+        <string>Generate report</string>
        </property>
       </widget>
       <widget class="QLabel" name="report_label">
@@ -1823,7 +1773,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Cadastro</string>
+       <string>Register</string>
       </attribute>
       <widget class="QFrame" name="frame_4">
        <property name="geometry">
@@ -1857,7 +1807,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Usuário</string>
+         <string>User</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="user_lineEdit">
@@ -1886,8 +1836,11 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 252, 219);</string>
+        </property>
         <property name="text">
-         <string>Cadastrar usuário</string>
+         <string>Register user</string>
         </property>
        </widget>
        <widget class="QPushButton" name="exclui_pushButton">
@@ -1906,8 +1859,11 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 252, 219);</string>
+        </property>
         <property name="text">
-         <string>Excluir usuário</string>
+         <string>Delete user</string>
         </property>
        </widget>
        <widget class="QPushButton" name="load_pushButton">
@@ -1926,8 +1882,11 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 252, 219);</string>
+        </property>
         <property name="text">
-         <string>Atualiza lista</string>
+         <string>Update user list</string>
         </property>
        </widget>
       </widget>

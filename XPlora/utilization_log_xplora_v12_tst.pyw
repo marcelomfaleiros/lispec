@@ -2,16 +2,21 @@
 # revisão 19/04/2024
 
 import os
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import uic
+#from utilization_log_xplora_intrfc import Ui_Form
 import csv
 import pandas as pd
 
-class Report(QtWidgets.QWidget):
+class Report(qtw.QWidget):
         
     '''
        
     ''' 
 
+    advisors_file = pd.read_csv('advisors_list.csv')
+    advisors_list = list(advisors_file['Orientador'])
+    
     file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
                    "Humidade", "Usuário", "Status do usuário",
                    "Orientador", "Operador", "Natureza da amostra", 
@@ -22,7 +27,7 @@ class Report(QtWidgets.QWidget):
                    "Temperatura inicial", "Temperatura final", "Observações",
                    "Problema no instrumento"]
     
-    estat_method = ["Advisor", "User", "Sample nature", "Laser"]
+    estat_method = ["Orientador", "Usuário", "Natureza da amostra", "Laser"]
 
     year_list = ["2024", "2025", "2026", "2027", "2028", "2029", "2030",
                 "2031", "2032", "2033", "2034", "2035", "2036", "2037",
@@ -35,14 +40,25 @@ class Report(QtWidgets.QWidget):
     months_list = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"]
     
-    coverage = ["Month", "Year", "Global"]
+    coverage = ["Mensal", "Anual", "Global"]
     
     data = []
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        uic.loadUi('utilization_log_xplora_intrfc_v12.ui', self)
+        uic.loadUi('utilization_log_xplora_intrfc.ui', self)
+
+        #self.setObjectName("Relatório de Utilização")
+        #self.setupUi(self)
+
+        self.advisor_comboBox.addItems(self.advisors_list)
+        self.load_list()
+        self.technician_comboBox.addItems(sorted(self.users_list))
+        self.estat_method_comboBox.addItems(self.estat_method)
+        self.abrangencia_comboBox.addItems(self.coverage)
+        self.year_comboBox.addItems(self.year_list)
+        self.month_comboBox.addItems(self.months_list)
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
@@ -50,27 +66,13 @@ class Report(QtWidgets.QWidget):
         self.exclui_pushButton.clicked.connect(lambda: self.cadastro('exclui'))
         self.load_pushButton.clicked.connect(self.load_list)
 
-        advisors_file = pd.read_csv('advisors_list.csv')
-        self.advisors_list = list(advisors_file['Orientador'])
-        self.advisor_comboBox.addItems(self.advisors_list)
-
-        self.estat_method_comboBox.addItems(self.estat_method)
-        self.abrangencia_comboBox.addItems(self.coverage)
-        self.year_comboBox.addItems(self.year_list)
-        self.month_comboBox.addItems(self.months_list)   
-
-        self.load_list()     
-
     def load_list(self):
-        #importar users_list   
-        self.user_comboBox.clear()
-        self.technician_comboBox.clear()
+        #importar users_list    
+        self.users_file = pd.read_csv('users_list.csv')
+        self.users_list = list(self.users_file['Usuarios'])
 
-        users_file = pd.read_csv('users_list.csv')
-        users_list = list(users_file['Usuarios'])
-
-        self.user_comboBox.addItems(sorted(users_list))
-        self.technician_comboBox.addItems(sorted(users_list)) 
+        self.user_comboBox.addItems(sorted(self.users_list))
+        
 
     def write_data(self):
         date = self.calendarWidget.selectedDate().toString("dd/MM/yy")
@@ -103,7 +105,7 @@ class Report(QtWidgets.QWidget):
            advisor = "N/C"
         elif self.ca_checkBox.isChecked():
            user_status = self.ca_checkBox.text()
-           advisor = "CA"
+           advisor = "N/C"
         elif self.treinamento_checkBox.isChecked():
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
@@ -111,12 +113,7 @@ class Report(QtWidgets.QWidget):
            user_status = "N/C" 
 
         ini_time = self.start_timeEdit.text()
-        fin_time = self.stop_timeEdit.text()    
-        if fin_time == "00:00":
-           fin_time = "24:00"
-        else:
-           fin_time = fin_time
-
+        fin_time = self.stop_timeEdit.text()         
         hora_ini = int(ini_time[:2])
         hora_fin = int(fin_time[:2])
         min_ini = int(ini_time[3:])/60
@@ -168,12 +165,11 @@ class Report(QtWidgets.QWidget):
         if self.mosaico_checkBox.isChecked():
            image_system.append(self.mosaico_checkBox.text())
 
+        laser_start_time = self.laser_start_timeEdit.text()
+        laser_stop_time = self.laser_stop_timeEdit.text()
+
         ini_laser_time = self.laser_start_timeEdit.text()
         fin_laser_time = self.laser_stop_timeEdit.text()
-        if fin_laser_time == "00:00":
-           fin_laser_time = "24:00"
-        else:
-           fin_laser_time = fin_laser_time
 
         hora_laser_ini = int(ini_laser_time[:2])
         hora_laser_fin = int(fin_laser_time[:2])
@@ -234,8 +230,8 @@ class Report(QtWidgets.QWidget):
 
         self.data = [date, ini_time, fin_time, total_time, temp, humid, user, 
                      user_status, advisor, technician, smpl_nature, smpl_number,
-                     smpl_description, spec_acq, image_system, ini_laser_time,
-                     fin_laser_time, total_laser_time, laser_power, filters, 
+                     smpl_description, spec_acq, image_system, laser_start_time,
+                     laser_stop_time, total_laser_time, laser_power, filters, 
                      objetivas, cal, linkam, Tstart, Tstop, observations, problems]
               
     def save(self):
@@ -252,6 +248,7 @@ class Report(QtWidgets.QWidget):
             with open(month_file_label, 'a', newline='', encoding='utf8') as mf:
                 write = csv.writer(mf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(year_file_label):
@@ -262,6 +259,7 @@ class Report(QtWidgets.QWidget):
             with open(year_file_label, 'a', newline='', encoding='utf8') as yf:
                 write = csv.writer(yf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(global_file_label):
@@ -272,6 +270,7 @@ class Report(QtWidgets.QWidget):
             with open(global_file_label, 'a', newline='', encoding='utf8') as gf:
                 write = csv.writer(gf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
         self.salvar_label.setText('OK - Arquivo salvo')
@@ -290,9 +289,9 @@ class Report(QtWidgets.QWidget):
        #file to be opened
        if coverage == 'Global':
           file = 'data_log.csv'
-       elif coverage == 'Year':
+       elif coverage == 'Anual':
           file = year + '_data_log.csv'
-       elif coverage == 'Month':
+       elif coverage == 'Mensal':
           file = month + year[2:] + '_data_log.csv'
 
        #read csv file
@@ -313,10 +312,10 @@ class Report(QtWidgets.QWidget):
                 parcial_time = round(array_orientador['Tempo laser (h)'].sum(), 1)
                 object_arr += n + ' ' + str(parcial_time) + '\n\n'  
                          
-          self.report_label.setText('Total laser time: ' + str(round(total_time, 1)) + 'h\n\n' +
+          self.report_label.setText('Tempo laser total: ' + str(round(total_time, 1)) + 'h\n\n' +
                                     object_arr)
       
-       elif search_method == 'Advisor':
+       elif search_method == 'Orientador':
           total_time = data['Tempo total (h)'].sum()
 
           search_object = data['Orientador']       
@@ -330,8 +329,10 @@ class Report(QtWidgets.QWidget):
                 array_orientador = data[data.Orientador == n]
                 parcial_time = round(array_orientador['Tempo total (h)'].sum(), 1)
                 object_arr += n + '     ' + str(parcial_time) + ' h \n\n'  
+
+                print(object_arr)
                 
-          self.report_label.setText('Total time: ' + str(round(total_time, 1)) + 'h\n\n' +
+          self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
                                     object_arr)
           
     def cadastro(self, action=str):  
@@ -347,7 +348,7 @@ class Report(QtWidgets.QWidget):
           users.to_csv('users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
+    app = qtw.QApplication([])
     tela = Report()
     tela.show()
     app.exec_()
