@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1042</width>
+    <width>1084</width>
     <height>868</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Utilization log - T64000</string>
+   <string>Utlization log - XPlora</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -134,7 +134,7 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="posdoc_checkBox">
                <property name="text">
-                <string>PosDoc</string>
+                <string>Pos-Doc</string>
                </property>
               </widget>
              </item>
@@ -242,6 +242,9 @@
                <width>311</width>
                <height>171</height>
               </rect>
+             </property>
+             <property name="verticalHeaderFormat">
+              <enum>QCalendarWidget::NoVerticalHeader</enum>
              </property>
             </widget>
            </widget>
@@ -487,7 +490,7 @@
              <item row="3" column="1">
               <widget class="QCheckBox" name="powder_checkBox">
                <property name="text">
-                <string>Powder</string>
+                <string>Power</string>
                </property>
               </widget>
              </item>
@@ -501,7 +504,7 @@
              <item row="3" column="0">
               <widget class="QLabel" name="label_21">
                <property name="text">
-                <string>Solid:</string>
+                <string>Solid</string>
                </property>
               </widget>
              </item>
@@ -522,7 +525,7 @@
              <item row="7" column="0">
               <widget class="QLabel" name="label_22">
                <property name="text">
-                <string>Líquido:</string>
+                <string>Liquid</string>
                </property>
               </widget>
              </item>
@@ -688,7 +691,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Acquisition modes</string>
+                <string>Spectrum Acquisition</string>
                </property>
               </widget>
              </item>
@@ -709,27 +712,27 @@
               </spacer>
              </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="microscope_checkBox">
+              <widget class="QCheckBox" name="pontoaponto_checkBox">
                <property name="text">
-                <string>Microscope</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="single_checkBox">
-               <property name="text">
-                <string>Single (from 100 cm-1)</string>
+                <string>Point to point</string>
                </property>
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QCheckBox" name="macro_checkBox">
+              <widget class="QCheckBox" name="espectro_autofocus_checkBox">
                <property name="text">
-                <string>Macro</string>
+                <string>Autofocus</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="binning_checkBox">
+               <property name="text">
+                <string>Binning</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
               <spacer name="verticalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -741,13 +744,6 @@
                 </size>
                </property>
               </spacer>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="triple_checkBox">
-               <property name="text">
-                <string>Triple (from 20 cm-1)</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -770,20 +766,6 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="imagemxy_checkBox">
-               <property name="text">
-                <string>xy image</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="imagem_autofocus_checkBox">
-               <property name="text">
-                <string>Autofocus</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
               <spacer name="verticalSpacer_2">
                <property name="orientation">
@@ -801,9 +783,50 @@
               </spacer>
              </item>
              <item row="6" column="0">
+              <widget class="QCheckBox" name="navmap_checkBox">
+               <property name="text">
+                <string>Navmap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="imagemxy_checkBox">
+               <property name="text">
+                <string>XY Image</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="imagem_autofocus_checkBox">
+               <property name="text">
+                <string>Autofocus</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QCheckBox" name="imagemxyz_checkBox">
                <property name="text">
-                <string>xy and z Image (3D)</string>
+                <string>XY and Z Image (3D)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="swift_checkBox">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Swift</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="mosaico_checkBox">
+               <property name="text">
+                <string>Mosaic</string>
                </property>
               </widget>
              </item>
@@ -823,11 +846,11 @@
                 </font>
                </property>
                <property name="text">
-                <string>Image system</string>
+                <string>Sistema de Imageamento</string>
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="9" column="0">
               <spacer name="verticalSpacer_3">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -839,26 +862,6 @@
                 </size>
                </property>
               </spacer>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="swift_checkBox">
-               <property name="maximumSize">
-                <size>
-                 <width>80</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Swift</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="mosaico_checkBox">
-               <property name="text">
-                <string>mosaic</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -894,7 +897,7 @@
            <widget class="QFrame" name="frame_16">
             <property name="maximumSize">
              <size>
-              <width>250</width>
+              <width>200</width>
               <height>16777215</height>
              </size>
             </property>
@@ -908,23 +911,17 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_31">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_11">
                <property name="text">
-                <string>532 nm</string>
+                <string>Stop</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="2">
-              <widget class="QTimeEdit" name="l633_stop_timeEdit"/>
+             <item row="3" column="1">
+              <widget class="QTimeEdit" name="laser_stop_timeEdit"/>
              </item>
-             <item row="6" column="1">
-              <widget class="QTimeEdit" name="l532_start_timeEdit"/>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="l633_power_lineEdit"/>
-             </item>
-             <item row="3" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="label_9">
                <property name="minimumSize">
                 <size>
@@ -939,14 +936,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Power 785 (mW)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="text">
-                <string>633 nm</string>
+                <string>Power (mW)</string>
                </property>
               </widget>
              </item>
@@ -969,25 +959,29 @@
                 </font>
                </property>
                <property name="text">
-                <string>Laser</string>
+                <string>Laser 785 nm</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Start</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="laser_power_lineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QTimeEdit" name="l785_start_timeEdit"/>
-             </item>
-             <item row="7" column="0">
-              <spacer name="verticalSpacer_14">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
+              <widget class="QTimeEdit" name="laser_start_timeEdit"/>
              </item>
              <item row="1" column="0">
               <spacer name="verticalSpacer_5">
@@ -1002,48 +996,31 @@
                </property>
               </spacer>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_10">
-               <property name="text">
-                <string>785 nm</string>
+             <item row="6" column="0">
+              <spacer name="verticalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
-             </item>
-             <item row="6" column="2">
-              <widget class="QTimeEdit" name="l532_stop_timeEdit"/>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="text">
-                <string>Power 633 (mW)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QTimeEdit" name="l633_start_timeEdit"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="l785_power_lineEdit">
-               <property name="maximumSize">
+               <property name="sizeHint" stdset="0">
                 <size>
-                 <width>80</width>
-                 <height>16777215</height>
+                 <width>20</width>
+                 <height>40</height>
                 </size>
                </property>
-              </widget>
+              </spacer>
              </item>
-             <item row="2" column="2">
-              <widget class="QTimeEdit" name="l785_stop_timeEdit"/>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_33">
-               <property name="text">
-                <string>Power 532 (mW)</string>
+             <item row="4" column="1">
+              <spacer name="verticalSpacer_15">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QLineEdit" name="l532_power_lineEdit"/>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1052,7 +1029,7 @@
            <widget class="QFrame" name="frame">
             <property name="minimumSize">
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>0</height>
              </size>
             </property>
@@ -1097,13 +1074,6 @@
               <widget class="QCheckBox" name="filtro1_checkBox">
                <property name="text">
                 <string>1%</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="filtro5_checkBox">
-               <property name="text">
-                <string>5%</string>
                </property>
               </widget>
              </item>
@@ -1156,6 +1126,33 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="objetiva50xfluor_checkBox">
+               <property name="text">
+                <string>50x fluor</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <spacer name="verticalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="objetiva50x_checkBox">
+               <property name="text">
+                <string>50x</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_8">
                <property name="font">
@@ -1170,47 +1167,32 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="3" column="0">
               <widget class="QCheckBox" name="objetiva100x_checkBox">
                <property name="text">
                 <string>100x</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="objetiva50xlwd_checkBox">
-               <property name="text">
-                <string>50x LWD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="objetiva10x_checkBox">
                <property name="text">
                 <string>10x</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="objetiva50x_checkBox">
-               <property name="text">
-                <string>50x</string>
+             <item row="6" column="0">
+              <spacer name="verticalSpacer_13">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="objetiva100xlwd_checkBox">
-               <property name="text">
-                <string>100x LWD</string>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
                </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="objetiva50xfluor_checkBox">
-               <property name="text">
-                <string>50x fluor</string>
-               </property>
-              </widget>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1261,30 +1243,9 @@
               </spacer>
              </item>
              <item>
-              <widget class="QCheckBox" name="align_checkBox">
-               <property name="text">
-                <string>It was necessary to align the laser</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="cal_checkBox">
-               <property name="text">
-                <string>Calibration was not necessary</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QCheckBox" name="cal_si_checkBox">
                <property name="text">
                 <string>Si (520,70 cm-1)</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBox">
-               <property name="text">
-                <string>Hg (546,1 nm)</string>
                </property>
               </widget>
              </item>
@@ -1331,7 +1292,7 @@
            <widget class="QFrame" name="frame_21">
             <property name="maximumSize">
              <size>
-              <width>380</width>
+              <width>400</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1345,7 +1306,43 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_9">
-             <item row="2" column="2">
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Temperature range (ºC)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="linkam_startT_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="thms600_checkBox">
+               <property name="text">
+                <string>THMS600</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
               <widget class="QLineEdit" name="linkam_stopT_lineEdit">
                <property name="minimumSize">
                 <size>
@@ -1358,6 +1355,13 @@
                  <width>150</width>
                  <height>100</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="ts1500_checkBox">
+               <property name="text">
+                <string>TS1500</string>
                </property>
               </widget>
              </item>
@@ -1388,7 +1392,7 @@
                </property>
               </spacer>
              </item>
-             <item row="4" column="1">
+             <item row="5" column="1">
               <spacer name="verticalSpacer_12">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -1400,45 +1404,6 @@
                 </size>
                </property>
               </spacer>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Temperature range (ºC)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="linkam_startT_lineEdit">
-               <property name="minimumSize">
-                <size>
-                 <width>100</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_34">
-               <property name="text">
-                <string>Gases</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" colspan="2">
-              <widget class="QLineEdit" name="gases_lineEdit"/>
              </item>
             </layout>
            </widget>
@@ -1467,7 +1432,7 @@
           <item row="1" column="0">
            <widget class="QCheckBox" name="inst_probl_checkBox">
             <property name="text">
-             <string>Inastrument problem</string>
+             <string>Instrument problems</string>
             </property>
            </widget>
           </item>
@@ -1837,10 +1802,10 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 252, 219);</string>
+         <string notr="true">background-color: rgb(255, 242, 198);</string>
         </property>
         <property name="text">
-         <string>Register user</string>
+         <string>User register</string>
         </property>
        </widget>
        <widget class="QPushButton" name="exclui_pushButton">
@@ -1860,7 +1825,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 252, 219);</string>
+         <string notr="true">background-color: rgb(255, 242, 198);</string>
         </property>
         <property name="text">
          <string>Delete user</string>
@@ -1883,12 +1848,306 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 252, 219);</string>
+         <string notr="true">background-color: rgb(255, 242, 198);</string>
         </property>
         <property name="text">
          <string>Update user list</string>
         </property>
        </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Maintenance</string>
+      </attribute>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>260</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Horiba technician 1</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_32">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>310</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Horiba technician 2</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_33">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>360</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Unicamp technician</string>
+       </property>
+      </widget>
+      <widget class="QPlainTextEdit" name="maint_description_plainTextEdit">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>470</y>
+         <width>951</width>
+         <height>151</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_34">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>430</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Description</string>
+       </property>
+      </widget>
+      <widget class="QCalendarWidget" name="maint_calendarWidget">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>312</width>
+         <height>183</height>
+        </rect>
+       </property>
+       <property name="verticalHeaderFormat">
+        <enum>QCalendarWidget::NoVerticalHeader</enum>
+       </property>
+      </widget>
+      <widget class="QTimeEdit" name="strt_maint_timeEdit">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>50</y>
+         <width>118</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTimeEdit" name="stp_maint_timeEdit">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>80</y>
+         <width>118</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_35">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>50</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_36">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>80</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="tech_horiba1_lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>260</y>
+         <width>441</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="tech_horiba2_lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>310</y>
+         <width>441</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="tech_unicamp_lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>360</y>
+         <width>441</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_37">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>110</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Room temperature</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="maint_temp_lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>650</x>
+         <y>110</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_38">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>140</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Room humidity</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="maint_hum_lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>650</x>
+         <y>140</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="maint_save_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>660</y>
+         <width>171</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="maint_save_label">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>690</y>
+         <width>281</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
       </widget>
      </widget>
     </widget>

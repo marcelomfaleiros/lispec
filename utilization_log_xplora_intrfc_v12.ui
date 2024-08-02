@@ -243,6 +243,9 @@
                <height>171</height>
               </rect>
              </property>
+             <property name="verticalHeaderFormat">
+              <enum>QCalendarWidget::NoVerticalHeader</enum>
+             </property>
             </widget>
            </widget>
           </item>

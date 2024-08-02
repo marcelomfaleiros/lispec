@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-# revisão 19/04/2024
 
 import os
-from PyQt5 import QtWidgets as qtw
-from utilization_log_fluorolog3_intrfc import Ui_Form
+from PyQt5 import QtWidgets, uic
 import csv
 import pandas as pd
-from time import sleep
 
-class Report(qtw.QWidget, Ui_Form):
+class Report(QtWidgets.QWidget):
         
     '''
        
@@ -31,8 +28,12 @@ class Report(qtw.QWidget, Ui_Form):
                    "Peltier", "Nanoled", "Linkam aquecimento",
                    "Linkam N2", "Observações", "Problema no instrumento"]
     
-    estat_method = ["Orientador", "Usuário", "Natureza da amostra",
-                    "Fonte de excitação", "Instrumento"]
+
+    maint_file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
+                         "Humidade", "Técnico Unicamp", "Técnico Horiba 1", 
+                         "Técnico Horiba 2", "Descrição"]    
+    
+    estat_method = ["Advisor", "User", "Sample nature", "Laser"]
 
     year_list = ["2024", "2025", "2026", "2027", "2028", "2029", "2030",
                 "2031", "2032", "2033", "2034", "2035", "2036", "2037",
@@ -45,21 +46,21 @@ class Report(qtw.QWidget, Ui_Form):
     months_list = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"]
     
-    coverage = ["Mensal", "Anual", "Global"]
+    coverage = ["Month", "Year", "Global"]
     
     data = []
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setObjectName("Relatório de Utilização")
-        self.setupUi(self)
+        uic.loadUi('utilization_log_fluorolog3_intrfc_v20.ui', self)
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
         self.cadastro_pushButton.clicked.connect(lambda: self.cadastro('add'))
         self.exclui_pushButton.clicked.connect(lambda: self.cadastro('exclui'))
         self.load_pushButton.clicked.connect(self.load_list)
+        self.maint_save_pushButton.clicked.connect(self.maint_save)
 
         advisors_file = pd.read_csv('advisors_list.csv')
         self.advisors_list = list(advisors_file['Orientador'])
@@ -114,7 +115,7 @@ class Report(qtw.QWidget, Ui_Form):
            advisor = "N/C"
         elif self.ca_checkBox.isChecked():
            user_status = self.ca_checkBox.text()
-           advisor = "N/C"
+           advisor = "CA"
         elif self.treinamento_checkBox.isChecked():
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
@@ -122,13 +123,22 @@ class Report(qtw.QWidget, Ui_Form):
            user_status = "N/C" 
 
         ini_time = self.start_timeEdit.text()
-        fin_time = self.stop_timeEdit.text()         
+        fin_time = self.stop_timeEdit.text()   
+        if fin_time == "00:00":
+           fin_time = "24:00"
+        else:
+           fin_time = fin_time
+
         hora_ini = int(ini_time[:2])
         hora_fin = int(fin_time[:2])
         min_ini = int(ini_time[3:])/60
         min_fin = int(fin_time[3:])/60
+
+        if hora_fin < hora_ini:
+           horas = round((hora_fin + min_fin) + (24 - hora_ini + min_ini), 1)
+        else:   
+           horas = round((hora_fin + min_fin) - (hora_ini + min_ini), 1)
    
-        horas = round((hora_fin + min_fin) - (hora_ini + min_ini), 1)
         total_time = str(horas)
         
         temp = self.temperature_lineEdit.text()
@@ -201,13 +211,20 @@ class Report(qtw.QWidget, Ui_Form):
            
            ini_laser1_time = self.exc_laser1_ini_timeEdit.text()
            fin_laser1_time = self.exc_laser1_fin_timeEdit.text()
+           if fin_laser1_time == "00:00":
+              fin_laser1_time = "24:00"
+           else:
+              fin_laser1_time = fin_laser1_time
 
            hora_laser1_ini = int(ini_laser1_time[:2])
            hora_laser1_fin = int(fin_laser1_time[:2])
            min_laser1_ini = int(ini_laser1_time[3:])/60
            min_laser1_fin = int(fin_laser1_time[3:])/60
-           horas_laser1 = round((hora_laser1_fin + min_laser1_fin) - 
-                                (hora_laser1_ini + min_laser1_ini), 1)
+
+           if hora_laser1_fin < hora_laser1_ini:
+              horas_laser1 = round((hora_laser1_fin + min_laser1_fin) + (24 - hora_laser1_ini + min_laser1_ini), 1)
+           else:
+              horas_laser1 = round((hora_laser1_fin + min_laser1_fin) - (hora_laser1_ini + min_laser1_ini), 1)
                        
            total_laser1_time = str(horas_laser1)
         else:
@@ -224,11 +241,21 @@ class Report(qtw.QWidget, Ui_Form):
            
            ini_laser2_time = self.exc_laser2_ini_timeEdit.text()
            fin_laser2_time = self.exc_laser2_fin_timeEdit.text()
+           if fin_laser2_time == "00:00":
+              fin_laser2_time = "24:00"
+           else:
+              fin_laser2_time = fin_laser2_time
 
            hora_laser2_ini = int(ini_laser2_time[:2])
            hora_laser2_fin = int(fin_laser2_time[:2])
            min_laser2_ini = int(ini_laser2_time[3:])/60
            min_laser2_fin = int(fin_laser2_time[3:])/60
+
+           if hora_laser2_fin < hora_laser2_ini:
+              horas_laser2 = round((hora_laser2_fin + min_laser2_fin) + (24 - hora_laser2_ini + min_laser2_ini), 1)
+           else:
+              horas_laser2 = round((hora_laser2_fin + min_laser2_fin) - (hora_laser2_ini + min_laser2_ini), 1)
+
            horas_laser2 = round((hora_laser2_fin + min_laser2_fin) - 
                                 (hora_laser2_ini + min_laser2_ini), 1)
                        
@@ -247,11 +274,21 @@ class Report(qtw.QWidget, Ui_Form):
            
            ini_laser3_time = self.exc_laser3_ini_timeEdit.text()
            fin_laser3_time = self.exc_laser3_fin_timeEdit.text()
+           if fin_laser3_time == "00:00":
+              fin_laser3_time = "24:00"
+           else:
+              fin_laser3_time = fin_laser3_time
 
            hora_laser3_ini = int(ini_laser3_time[:2])
            hora_laser3_fin = int(fin_laser3_time[:2])
            min_laser3_ini = int(ini_laser3_time[3:])/60
            min_laser3_fin = int(fin_laser3_time[3:])/60
+
+           if hora_laser3_fin < hora_laser3_ini:
+              horas_laser3 = round((hora_laser3_fin + min_laser3_fin) + (24 - hora_laser3_ini + min_laser3_ini), 1)
+           else:
+              horas_laser3 = round((hora_laser3_fin + min_laser3_fin) - (hora_laser3_ini + min_laser3_ini), 1)
+
            horas_laser3 = round((hora_laser3_fin + min_laser3_fin) - 
                                 (hora_laser3_ini + min_laser3_ini), 1)
                        
@@ -351,6 +388,31 @@ class Report(qtw.QWidget, Ui_Form):
                      int_sphere, accessories, cryostat, 
                      peltier, nanoled, linkam_heat, 
                      linkam_n2, observations, problems]
+        
+        maint_date = self.maint_calendarWidget.selectedDate().toString("dd/MM/yy")
+        
+        ini_maint_time = self.strt_maint_timeEdit.text()
+        fin_maint_time = self.stp_maint_timeEdit.text()
+        hora_maint_ini = int(ini_maint_time[:2])
+        hora_maint_fin = int(fin_maint_time[:2])
+        min_maint_ini = int(ini_maint_time[3:])/60
+        min_maint_fin = int(fin_maint_time[3:])/60
+        horas_maint = round((hora_maint_fin + min_maint_fin) - (hora_maint_ini + min_maint_ini), 1)
+        total_maint_time = str(horas_maint)
+
+        maint_temp = self.maint_temp_lineEdit.text()
+        maint_humid = self.maint_hum_lineEdit.text()
+
+        unicamp_tech = self.tech_unicamp_lineEdit.text()
+
+        horiba1 = self.tech_horiba1_lineEdit.text()
+        horiba2 = self.tech_horiba2_lineEdit.text()
+
+        maint_description = self.maint_description_plainTextEdit.toPlainText()
+
+        self.maint_data = [maint_date, ini_maint_time, fin_maint_time, total_maint_time,
+                           maint_temp, maint_humid, unicamp_tech, horiba1, horiba2,
+                           maint_description]
                      
     def save(self):
         self.write_data()
@@ -390,9 +452,20 @@ class Report(qtw.QWidget, Ui_Form):
 
         self.salvar_label.setText('OK - Arquivo salvo!')
 
-        '''with open('raw_data_log.txt', 'a') as tf:
-            tf.write('\r')
-            tf.write(str(self.data) + '\r')'''   
+    def maint_save(self):
+        self.write_data()
+
+        if os.path.exists('Fluorolog_maintenance_log.csv'):
+            with open('Fluorolog_maintenance_log.csv', 'a', newline='', encoding='utf8') as mtf:
+                write = csv.writer(mtf)                
+                write.writerow(self.maint_data)       
+        else:
+            with open('Fluorolog_maintenance_log.csv', 'a', newline='', encoding='utf8') as mtf:
+                write = csv.writer(mtf)
+                write.writerow(self.maint_file_header)
+                write.writerow(self.maint_data)
+
+        self.maint_save_label.setText('OK - Arquivo salvo') 
 
     def report(self): 
        #search parameters      
@@ -404,51 +477,33 @@ class Report(qtw.QWidget, Ui_Form):
        #file to be opened
        if coverage == 'Global':
           file = 'Fluorolog3 - data_log.csv'
-       elif coverage == 'Anual':
+       elif coverage == 'Year':
           file = 'Fluorolog3 - ' + year + '_data_log.csv'
-       elif coverage == 'Mensal':
+       elif coverage == 'Month':
           file = 'Fluorolog3 - ' + month + year[2:] + '_data_log.csv'
 
        #read csv file
        data = pd.read_csv(file)
 
        if search_method == 'Fonte de excitação':
-          total_time_xe = data['Tempo Xe (h)'].sum()
-          total_time_laser1 = data['Tempo Laser 1 (h)'].sum()
-          total_time_laser2 = data['Tempo Laser 2 (h)'].sum()
-          total_time_laser3 = data['Tempo Laser 3 (h)'].sum()
+          total_time = data['Tempo Exc (h)'].sum()
 
-          search_object = data['Orientador']    
+          search_object = data['Advisor']    
           search_object = list(set(search_object))
           search_object = sorted(search_object)
 
-          object_str_xe = ''
-          object_str_laser1 = ''
-          object_str_laser2 = ''
-          object_str_laser3 = ''
+          object_arr = ''
 
           for n in search_object:
              if n in self.advisors_list:
                 array_orientador = data[data.Orientador == n]
-                parcial_time_xe = round(array_orientador['Tempo Xe (h)'].sum(), 1)
-                parcial_time_laser1 = round(array_orientador['Tempo Laser 1 (h)'].sum(), 1)
-                parcial_time_laser2 = round(array_orientador['Tempo Laser 2 (h)'].sum(), 1)
-                parcial_time_laser3 = round(array_orientador['Tempo Laser 3 (h)'].sum(), 1)
-                object_str_xe += n + ' ' + str(parcial_time_xe) + '\n' 
-                object_str_laser1 += n + ' ' + str(parcial_time_laser1) + '\n' 
-                object_str_laser2 += n + ' ' + str(parcial_time_laser2) + '\n'
-                object_str_laser3 += n + ' ' + str(parcial_time_laser3) + '\n'
+                parcial_time = round(array_orientador['Tempo Exc (h)'].sum(), 1)
+                object_arr += n + ' ' + str(parcial_time) + '\n\n'  
                          
-          self.report_label.setText('Tempo Xe total: ' + str(round(total_time_xe, 1)) + 'h\n\n' +
-                                    object_str_xe + '\n' +
-                                    'Tempo Laser1 total: ' + str(round(total_time_laser1, 1)) + 'h\n\n' +
-                                    object_str_laser1 + '\n' +
-                                    'Tempo Laser2 total: ' + str(round(total_time_laser2, 1)) + 'h\n\n' +
-                                    object_str_laser2 + '\n' +
-                                    'Tempo Laser3 total: ' + str(round(total_time_laser3, 1)) + 'h\n\n' +
-                                    object_str_laser3)
+          self.report_label.setText('Tempo Exc (h): ' + str(round(total_time, 1)) + 'h\n\n' +
+                                    object_arr)
       
-       elif search_method == 'Orientador':
+       elif search_method == 'Advisor':
           total_time = data['Tempo total (h)'].sum()
 
           search_object = data['Orientador']       
@@ -466,22 +521,6 @@ class Report(qtw.QWidget, Ui_Form):
           self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
                                     object_arr)
           
-       '''elif search_method == 'Instrumento':
-          search_object = data['Problema no instrumento']       
-          search_object = list(set(search_object))
-          search_object = sorted(search_object)
-
-          object_arr = ''
-
-          for n in search_object:
-             if n in self.advisors_list:
-                array_orientador = data[data.Orientador == n]
-                parcial_time = round(array_orientador['Tempo total (h)'].sum(), 1)
-                object_arr += n + '     ' + str(parcial_time) + ' h \n\n'  
-                
-          self.report_label.setText('Tempo total: ' + str(round(total_time, 1)) + 'h\n\n' +
-                                    object_arr)'''
-          
     def cadastro(self, action=str):  
        user = self.user_lineEdit.text()
        if action == 'add':         
@@ -495,7 +534,7 @@ class Report(qtw.QWidget, Ui_Form):
           users.to_csv('fluorolog3_users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
-    app = qtw.QApplication([])
+    app = QtWidgets.QApplication([])
     tela = Report()
     tela.show()
     app.exec_()

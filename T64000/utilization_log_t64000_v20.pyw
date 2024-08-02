@@ -1,29 +1,33 @@
 # -*- coding: utf-8 -*-
-# revisão 19/04/2024
 
 import os
-from PyQt5 import QtWidgets as qtw
-from utilization_log_xplora_intrfc_v11 import Ui_Form
+from PyQt5 import QtWidgets, uic
 import csv
 import pandas as pd
 
-class Report(qtw.QWidget, Ui_Form):
+class Report(QtWidgets.QWidget):
         
     '''
        
     ''' 
-
-    file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
-                   "Humidade", "Usuário", "Status do usuário",
+    
+    file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala (ºC)", 
+                   "Humidade (%)", "Usuário", "Status do usuário",
                    "Orientador", "Operador", "Natureza da amostra", 
                    "Número de amostras", "Descrição da amostra",
-                   "Aquisição de espectro", "Sistema de Imageamento",
-                   "Início laser", "Final laser", "Tempo laser (h)","Potência do laser", 
+                   "Modos de aquisição", "Sistema de Imageamento",
+                   "Início 785", "Final 785", "Tempo 785 (h)","Potência 785 (mW)",
+                   "Início 633", "Final 633", "Tempo 633 (h)","Potência 633 (mW)",
+                   "Início 532", "Final 532", "Tempo 532 (h)","Potência 532 (mW)", 
                    "Filtros", "Objetivas", "Calibração", "Forno Linkam",
                    "Temperatura inicial", "Temperatura final", "Observações",
                    "Problema no instrumento"]
     
-    estat_method = ["Orientador", "Usuário", "Natureza da amostra", "Laser"]
+    maint_file_header = ["Data", "Início", "Fim", "Tempo total (h)", "Temp. sala", 
+                         "Humidade", "Técnico Unicamp", "Técnico Horiba 1", 
+                         "Técnico Horiba 2", "Descrição"]
+    
+    estat_method = ["Advisor", "Usuer", "Sample nature", "Laser"]
 
     year_list = ["2024", "2025", "2026", "2027", "2028", "2029", "2030",
                 "2031", "2032", "2033", "2034", "2035", "2036", "2037",
@@ -36,21 +40,21 @@ class Report(qtw.QWidget, Ui_Form):
     months_list = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep",
                    "Oct", "Nov", "Dec"]
     
-    coverage = ["Mensal", "Anual", "Global"]
+    coverage = ["Month", "Year", "Global"]
     
     data = []
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setObjectName("Relatório de Utilização")
-        self.setupUi(self)
+        uic.loadUi('utilization_log_t64000_intrfc_v20.ui', self)     
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
         self.cadastro_pushButton.clicked.connect(lambda: self.cadastro('add'))
         self.exclui_pushButton.clicked.connect(lambda: self.cadastro('exclui'))
-        self.load_pushButton.clicked.connect(self.load_list)
+        self.load_pushButton.clicked.connect(self.load_lists)
+        self.maint_save_pushButton.clicked.connect(self.maint_save)
 
         advisors_file = pd.read_csv('advisors_list.csv')
         self.advisors_list = list(advisors_file['Orientador'])
@@ -59,21 +63,21 @@ class Report(qtw.QWidget, Ui_Form):
         self.estat_method_comboBox.addItems(self.estat_method)
         self.abrangencia_comboBox.addItems(self.coverage)
         self.year_comboBox.addItems(self.year_list)
-        self.month_comboBox.addItems(self.months_list)   
+        self.month_comboBox.addItems(self.months_list)
 
-        self.load_list()     
+        self.load_lists()
 
-    def load_list(self):
-        #importar users_list   
+    def load_lists(self):
+        #importar lists
         self.user_comboBox.clear()
         self.technician_comboBox.clear()
-
-        users_file = pd.read_csv('users_list.csv')
+        
+        users_file = pd.read_csv('t64000_users_list.csv')
         users_list = list(users_file['Usuarios'])
 
         self.user_comboBox.addItems(sorted(users_list))
         self.technician_comboBox.addItems(sorted(users_list)) 
-
+        
     def write_data(self):
         date = self.calendarWidget.selectedDate().toString("dd/MM/yy")
 
@@ -105,7 +109,7 @@ class Report(qtw.QWidget, Ui_Form):
            advisor = "N/C"
         elif self.ca_checkBox.isChecked():
            user_status = self.ca_checkBox.text()
-           advisor = "N/C"
+           advisor = "CA"
         elif self.treinamento_checkBox.isChecked():
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
@@ -113,7 +117,7 @@ class Report(qtw.QWidget, Ui_Form):
            user_status = "N/C" 
 
         ini_time = self.start_timeEdit.text()
-        fin_time = self.stop_timeEdit.text()    
+        fin_time = self.stop_timeEdit.text()  
         if fin_time == "00:00":
            fin_time = "24:00"
         else:
@@ -123,8 +127,12 @@ class Report(qtw.QWidget, Ui_Form):
         hora_fin = int(fin_time[:2])
         min_ini = int(ini_time[3:])/60
         min_fin = int(fin_time[3:])/60
+
+        if hora_fin < hora_ini:
+           horas = round((hora_fin + min_fin) + (24 - hora_ini + min_ini), 1)
+        else:   
+           horas = round((hora_fin + min_fin) - (hora_ini + min_ini), 1)
    
-        horas = round((hora_fin + min_fin) - (hora_ini + min_ini), 1)
         total_time = str(horas)
         
         temp = self.temperature_lineEdit.text()
@@ -148,13 +156,15 @@ class Report(qtw.QWidget, Ui_Form):
 
         smpl_description = self.description_plainTextEdit.toPlainText()
 
-        spec_acq = []
-        if self.pontoaponto_checkBox.isChecked():
-           spec_acq.append(self.pontoaponto_checkBox.text())
-        if self.binning_checkBox.isChecked():
-           spec_acq.append(self.binning_checkBox.text())
-        if self.espectro_autofocus_checkBox.isChecked():
-           spec_acq.append(self.espectro_autofocus_checkBox.text())
+        acq_modes = []
+        if self.microscope_checkBox.isChecked():
+           acq_modes.append(self.microscope_checkBox.text())
+        if self.macro_checkBox.isChecked():
+           acq_modes.append(self.macro_checkBox.text())
+        if self.single_checkBox.isChecked():
+           acq_modes.append(self.single_checkBox.text())
+        if self.triple_checkBox.isChecked():
+           acq_modes.append(self.triple_checkBox.text())
 
         image_system = [] 
         if self.imagemxy_checkBox.isChecked():
@@ -162,30 +172,72 @@ class Report(qtw.QWidget, Ui_Form):
         if self.imagem_autofocus_checkBox.isChecked():
            image_system.append(self.imagem_autofocus_checkBox.text())
         if self.imagemxyz_checkBox.isChecked():
-           image_system.append(self.imagemxyz_checkBox.text())
-        if self.navmap_checkBox.isChecked():
-           image_system.append(self.navmap_checkBox.text())
+           image_system.append(self.imagemxyz_checkBox.text())        
         if self.swift_checkBox.isChecked():
            image_system.append(self.swift_checkBox.text())
-        if self.mosaico_checkBox.isChecked():
-           image_system.append(self.mosaico_checkBox.text())
-
-        ini_laser_time = self.laser_start_timeEdit.text()
-        fin_laser_time = self.laser_stop_timeEdit.text()
-        if fin_laser_time == "00:00":
-           fin_laser_time = "24:00"
+        
+        ini_l785_time = self.l785_start_timeEdit.text()
+        fin_l785_time = self.l785_stop_timeEdit.text()
+        if fin_l785_time == "00:00":
+           fin_l785_time = "24:00"
         else:
-           fin_laser_time = fin_laser_time
+           fin_l785_time = fin_l785_time
 
-        hora_laser_ini = int(ini_laser_time[:2])
-        hora_laser_fin = int(fin_laser_time[:2])
-        min_laser_ini = int(ini_laser_time[3:])/60
-        min_laser_fin = int(fin_laser_time[3:])/60
-        horas_laser = round((hora_laser_fin + min_laser_fin) - (hora_laser_ini + min_laser_ini), 1)
+        hora_l785_ini = int(ini_l785_time[:2])
+        hora_l785_fin = int(fin_l785_time[:2])
+        min_l785_ini = int(ini_l785_time[3:])/60
+        min_l785_fin = int(fin_l785_time[3:])/60
+
+        if hora_l785_fin < hora_l785_ini:
+           horas_l785 = round((hora_l785_fin + min_l785_fin) + (24 - hora_l785_ini + min_l785_ini), 1)
+        else:
+           horas_l785 = round((hora_l785_fin + min_l785_fin) - (hora_l785_ini + min_l785_ini), 1)
                        
-        total_laser_time = str(horas_laser)
+        total_l785_time = str(horas_l785)
 
-        laser_power = self.laser_power_lineEdit.text()
+        l785_power = self.l785_power_lineEdit.text()
+
+        ini_l633_time = self.l633_start_timeEdit.text()
+        fin_l633_time = self.l633_stop_timeEdit.text()
+        if fin_l633_time == "00:00":
+           fin_l633_time = "24:00"
+        else:
+           fin_l633_time = fin_l633_time
+
+        hora_l633_ini = int(ini_l633_time[:2])
+        hora_l633_fin = int(fin_l633_time[:2])
+        min_l633_ini = int(ini_l633_time[3:])/60
+        min_l633_fin = int(fin_l633_time[3:])/60
+
+        if hora_l633_fin < hora_l633_ini:
+           horas_l633 = round((hora_l633_fin + min_l633_fin) + (24 - hora_l633_ini + min_l633_ini), 1)
+        else:
+           horas_l633 = round((hora_l633_fin + min_l633_fin) - (hora_l633_ini + min_l633_ini), 1)
+                       
+        total_l633_time = str(horas_l633)
+
+        l633_power = self.l633_power_lineEdit.text()
+
+        ini_l532_time = self.l532_start_timeEdit.text()
+        fin_l532_time = self.l532_stop_timeEdit.text()
+        if fin_l532_time == "00:00":
+           fin_l532_time = "24:00"
+        else:
+           fin_l532_time = fin_l532_time
+
+        hora_l532_ini = int(ini_l532_time[:2])
+        hora_l532_fin = int(fin_l532_time[:2])
+        min_l532_ini = int(ini_l532_time[3:])/60
+        min_l532_fin = int(fin_l532_time[3:])/60
+
+        if hora_l532_fin < hora_l532_ini:
+           horas_l532 = round((hora_l532_fin + min_l532_fin) + (24 - hora_l532_ini + min_l532_ini), 1)
+        else:
+           horas_l532 = round((hora_l532_fin + min_l532_fin) - (hora_l532_ini + min_l532_ini), 1)
+                       
+        total_l532_time = str(horas_l532)
+
+        l532_power = self.l532_power_lineEdit.text()
 
         filters = []
         if self.filtro01_checkBox.isChecked():
@@ -206,23 +258,25 @@ class Report(qtw.QWidget, Ui_Form):
            objetivas.append(self.objetiva10x_checkBox.text())
         if self.objetiva50x_checkBox.isChecked():
            objetivas.append(self.objetiva50x_checkBox.text())
-        if self.objetiva50xfluor_checkBox.isChecked():
-           objetivas.append(self.objetiva50xfluor_checkBox.text())
+        if self.objetiva50xlwd_checkBox.isChecked():
+           objetivas.append(self.objetiva50xlwd_checkBox.text())
         if self.objetiva100x_checkBox.isChecked():
            objetivas.append(self.objetiva100x_checkBox.text())
+        if self.objetiva100xlwd_checkBox.isChecked():
+           objetivas.append(self.objetiva100xlwd_checkBox.text())
 
         cal = []
+        if self.align_checkBox.isChecked():
+           cal.append(self.align_checkBox.text())
+        if self.cal_checkBox.isChecked():
+           cal.append(self.cal_checkBox.text())
         if self.cal_si_checkBox.isChecked():
            cal.append(self.cal_si_checkBox.text())
         if self.cal_outro_checkBox.isChecked():
            cal.append(self.cal_outro_textEdit.toPlainText())
 
-        if self.ts1500_checkBox.isChecked():
-           linkam = self.ts1500_checkBox.text()
-        elif self.thms600_checkBox.isChecked():
-           linkam = self.thms600_checkBox.text()
-        else:
-           linkam = "N/C"
+        #linkam.append(self.linkam_startT_lineEdit.text() + ' - ' + self.linkam_stopT_lineEdit.text())
+        linkam = self.gases_lineEdit.text()
 
         Tstart = self.linkam_startT_lineEdit.text()
         Tstop = self.linkam_stopT_lineEdit.text()
@@ -230,21 +284,48 @@ class Report(qtw.QWidget, Ui_Form):
         observations = self.observations_textEdit.toPlainText()   
 
         if self.inst_probl_checkBox.isChecked():
-            problems = self.inst_probl_textEdit.toPlainText()  
+           problems = self.inst_probl_textEdit.toPlainText()  
         else:
            problems = "N/C"                      
 
         self.data = [date, ini_time, fin_time, total_time, temp, humid, user, 
                      user_status, advisor, technician, smpl_nature, smpl_number,
-                     smpl_description, spec_acq, image_system, ini_laser_time,
-                     fin_laser_time, total_laser_time, laser_power, filters, 
+                     smpl_description, acq_modes, image_system, ini_l785_time,
+                     fin_l785_time, total_l785_time, l785_power, ini_l633_time,
+                     fin_l633_time, total_l633_time, l633_power, ini_l532_time,
+                     fin_l532_time, total_l532_time, l532_power, filters, 
                      objetivas, cal, linkam, Tstart, Tstop, observations, problems]
+        
+        maint_date = self.maint_calendarWidget.selectedDate().toString("dd/MM/yy")
+        
+        ini_maint_time = self.strt_maint_timeEdit.text()
+        fin_maint_time = self.stp_maint_timeEdit.text()
+        hora_maint_ini = int(ini_maint_time[:2])
+        hora_maint_fin = int(fin_maint_time[:2])
+        min_maint_ini = int(ini_maint_time[3:])/60
+        min_maint_fin = int(fin_maint_time[3:])/60
+        horas_maint = round((hora_maint_fin + min_maint_fin) - (hora_maint_ini + min_maint_ini), 1)
+        total_maint_time = str(horas_maint)
+
+        maint_temp = self.maint_temp_lineEdit.text()
+        maint_humid = self.maint_hum_lineEdit.text()
+
+        unicamp_tech = self.tech_unicamp_lineEdit.text()
+
+        horiba1 = self.tech_horiba1_lineEdit.text()
+        horiba2 = self.tech_horiba2_lineEdit.text()
+
+        maint_description = self.maint_description_plainTextEdit.toPlainText()
+
+        self.maint_data = [maint_date, ini_maint_time, fin_maint_time, total_maint_time,
+                           maint_temp, maint_humid, unicamp_tech, horiba1, horiba2,
+                           maint_description]
               
     def save(self):
         self.write_data()
-        month_file_label = self.months_list[self.month - 1] + self.year + '_data_log.csv'
-        year_file_label = '20' + self.year + '_data_log.csv'
-        global_file_label = 'data_log.csv'
+        month_file_label = 'T64000 - ' + self.months_list[self.month - 1] + self.year + '_data_log.csv'
+        year_file_label = 'T64000 - ' + '20' + self.year + '_data_log.csv'
+        global_file_label = 'T64000 - ' + 'data_log.csv'
 
         if os.path.exists(month_file_label):
             with open(month_file_label, 'a', newline='', encoding='utf8') as mf:
@@ -254,6 +335,7 @@ class Report(qtw.QWidget, Ui_Form):
             with open(month_file_label, 'a', newline='', encoding='utf8') as mf:
                 write = csv.writer(mf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(year_file_label):
@@ -264,6 +346,7 @@ class Report(qtw.QWidget, Ui_Form):
             with open(year_file_label, 'a', newline='', encoding='utf8') as yf:
                 write = csv.writer(yf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
         if os.path.exists(global_file_label):
@@ -274,13 +357,25 @@ class Report(qtw.QWidget, Ui_Form):
             with open(global_file_label, 'a', newline='', encoding='utf8') as gf:
                 write = csv.writer(gf)
                 write.writerow(self.file_header)
+                write.writerow("")
                 write.writerow(self.data)
 
-        self.salvar_label.setText('OK - Arquivo salvo')
+        self.salvar_label.setText('OK - File saved!')
+         
+    def maint_save(self):
+        self.write_data()
 
-        '''with open('raw_data_log.txt', 'a') as tf:
-            tf.write('\r')
-            tf.write(str(self.data) + '\r')'''   
+        if os.path.exists('T64000_maintenance_log.csv'):
+            with open('T64000_maintenance_log.csv', 'a', newline='', encoding='utf8') as mtf:
+                write = csv.writer(mtf)                
+                write.writerow(self.maint_data)       
+        else:
+            with open('T64000_maintenance_log.csv', 'a', newline='', encoding='utf8') as mtf:
+                write = csv.writer(mtf)
+                write.writerow(self.maint_file_header)
+                write.writerow(self.maint_data)
+
+        self.maint_save_label.setText('OK - Arquivo salvo')
 
     def report(self): 
        #search parameters      
@@ -291,40 +386,52 @@ class Report(qtw.QWidget, Ui_Form):
 
        #file to be opened
        if coverage == 'Global':
-          file = 'data_log.csv'
-       elif coverage == 'Anual':
-          file = year + '_data_log.csv'
-       elif coverage == 'Mensal':
-          file = month + year[2:] + '_data_log.csv'
+          file = 'T64000 - data_log.csv'
+       elif coverage == 'Year':
+          file = 'T64000 - ' + year + '_data_log.csv'
+       elif coverage == 'Month':
+          file = 'T64000 - ' + month + year[2:] + '_data_log.csv'
 
        #read csv file
        data = pd.read_csv(file)
 
        if search_method == 'Laser':
-          total_time = data['Tempo laser (h)'].sum()
+          total_time_785 = data['Tempo 785 (h)'].sum()
+          total_time_633 = data['Tempo 633 (h)'].sum()
+          total_time_532 = data['Tempo 532 (h)'].sum()
 
           search_object = data['Orientador']    
           search_object = list(set(search_object))
           search_object = sorted(search_object)
 
-          object_arr = ''
+          object_str_785 = ''
+          object_str_633 = ''
+          object_str_532 = ''
 
           for n in search_object:
              if n in self.advisors_list:
                 array_orientador = data[data.Orientador == n]
-                parcial_time = round(array_orientador['Tempo laser (h)'].sum(), 1)
-                object_arr += n + ' ' + str(parcial_time) + '\n\n'  
+                parcial_time_785 = round(array_orientador['Tempo 785 (h)'].sum(), 1)
+                parcial_time_633 = round(array_orientador['Tempo 633 (h)'].sum(), 1)
+                parcial_time_532 = round(array_orientador['Tempo 532 (h)'].sum(), 1)
+                object_str_785 += n + ' ' + str(parcial_time_785) + '\n' 
+                object_str_633 += n + ' ' + str(parcial_time_633) + '\n'
+                object_str_532 += n + ' ' + str(parcial_time_532) + '\n'
                          
-          self.report_label.setText('Tempo laser total: ' + str(round(total_time, 1)) + 'h\n\n' +
-                                    object_arr)
+          self.report_label.setText('Tempo 785 nm total: ' + str(round(total_time_785, 1)) + 'h\n\n' +
+                                    object_str_785 + '\n' +
+                                    'Tempo 633 nm total: ' + str(round(total_time_633, 1)) + 'h\n\n' +
+                                    object_str_633 + '\n' +
+                                    'Tempo 532 nm total: ' + str(round(total_time_532, 1)) + 'h\n\n' +
+                                    object_str_532)
       
-       elif search_method == 'Orientador':
+       elif search_method == 'Advisor':
           total_time = data['Tempo total (h)'].sum()
 
-          search_object = data['Orientador']       
+          search_object = data['Orientador']        
           search_object = list(set(search_object))
           search_object = sorted(search_object)
-
+          
           object_arr = ''
 
           for n in search_object:
@@ -340,16 +447,16 @@ class Report(qtw.QWidget, Ui_Form):
        user = self.user_lineEdit.text()
        if action == 'add':         
           user = [user] 
-          with open('users_list.csv', 'a', newline='', encoding='utf8') as uf:
+          with open('t64000_users_list.csv', 'a', newline='', encoding='utf8') as uf:
               write = csv.writer(uf)                
               write.writerow(user) 
        elif action == 'exclui':
-          users = pd.read_csv('users_list.csv')
+          users = pd.read_csv('t64000_users_list.csv')
           users = users.drop(users[users.Usuarios == user].index)
-          users.to_csv('users_list.csv', index=False)                                                       
+          users.to_csv('t64000_users_list.csv', index=False)                                                       
 
 if __name__ == '__main__':
-    app = qtw.QApplication([])
+    app = QtWidgets.QApplication([])
     tela = Report()
     tela.show()
     app.exec_()
