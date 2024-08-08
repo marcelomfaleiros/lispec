@@ -1,119 +1,104 @@
-int p, k, wls;
+int k, steps;
 
-void pin_high(int);
+int p = 1;
 
-void setup() 
+void step(int);
+
+void setup()             // pin config
 { 
   Serial.begin(9600);  
-  pinMode(2, OUTPUT);    // Digital control pin  
-  pinMode(3, OUTPUT);    // Digital control pin 
-  pinMode(4, OUTPUT);    // Digital control pin
-  pinMode(5, OUTPUT);    // Digital control pin
-  pinMode(6, INPUT);     // Limit switch  
-  pinMode(7, INPUT);     // Limit switch 
-  pinMode(8, INPUT);     // Remote control - up fast 
-  pinMode(9, INPUT);     // Remote control - up slow
-  pinMode(10, INPUT);    // Remote control - down fast 
-  pinMode(11, INPUT);    // Remote control - down slow
+  pinMode(2, OUTPUT);    // motor control  
+  pinMode(3, OUTPUT);    // motor control 
+  pinMode(4, OUTPUT);    // motor control
+  pinMode(5, OUTPUT);    // motor control
+  pinMode(6, INPUT);     // limit switch  
+  pinMode(7, INPUT);     // limit switch 
+  pinMode(8, INPUT);     // remote control  
+  pinMode(9, INPUT);     // remote control 
+  pinMode(10, INPUT);    // remote control 
+  pinMode(11, INPUT);    // remote control
+  step(0);
+}
 
 void loop() 
 {         
-  /*if (digitalRead(8) == LOW)
+  if (digitalRead(8) == LOW)      //button pressed
   {
-    p = 5;
-    while (digitalRead(8) == LOW)
-    {
-      pin_high(p);
-      delay(5);
-      p--;
-      if (p < 2)
-        p = 5;
-    }
+    step(p);
+    delay(5);
+    p--;
+    if (p < 1)
+      p = 8;
   }    
   if (digitalRead(9) == LOW)
   {
-    p = 2;
-    while (digitalRead(9) == LOW)
-    {
-      pin_high(p);
-      delay(5);
-      p++;
-      if (p > 5)
-        p = 2;
-    }
+    step(p);
+    delay(5);
+    p++;
+    if (p > 8)
+      p = 1;
   }    
   if (digitalRead(10) == LOW)
   {
-    p = 5;
-    while (digitalRead(10) == LOW)
-    {
-      pin_high(p);
-      delay(60);
-      p--;
-      if (p < 2)
-        p = 5;
-    }
+    step(p);
+    delay(60);
+    p--;
+    if (p < 1)
+      p = 8;
   }    
-  if (digitalRead(11) == LOW)
+  /*if (digitalRead(11) == LOW)
   {
-    p = 2;
-    while (digitalRead(11) == LOW)
-    {
-      pin_high(p);
-      delay(60);
-      p++;
-      if (p > 5)
-        p = 2;
-    }
-  }   */ 
+    step(p);
+    delay(60);
+    p++;
+    if (p > 5)
+      p = 2;
+  } */ 
   if (Serial.available() > 0)   //verifica a porta serial 
   { 
-    wls = Serial.parseInt();   //recebe um valor via serial em number of steps        
-    if (wls > 0)    
+    steps = Serial.parseInt();   //recebe um valor via serial em number of steps        
+    if (steps > 0)    
     {           
-      p = 5;
-      for (k = 0; k < wls; k++) //wls = number of steps
+      for (k = 0; k < steps; k++) //wls = number of steps
       {
         if (digitalRead(7) == HIGH) // if limit switch not pressed
           break;
-        pin_high(p);
-        delay(6);
+        step(p);
+        delay(4);
         p--;
-        if (p < 2)
-          p = 5;
+        if (p < 1)
+          p = 8;
       }   
     }               
-    else if (wls < 0)
+    else if (steps < 0)
     {               
-      p = 2;
-      for (k = 0; k < (abs(wls) + 500); k++)
+      for (k = 0; k < (abs(steps) + 1000); k++)
       {  
         if (digitalRead(6) == HIGH)  // if limit switch not pressed
           break;
-        pin_high(p);
-        delay(6);
+        step(p);
+        delay(4);
         p++;
-        if (p > 5)
-          p = 2;
+        if (p > 8)
+          p = 1;
       }
-      p = 5;
-      for (k = 0; k < 500; k++) 
+      for (k = 0; k < 1000; k++) 
       {  
-        if (digitalRead(6) == HIGH)
+        if (digitalRead(6) == HIGH)  // if limit switch not pressed
           break;
-        pin_high(p);
-        delay(6);
+        step(p);
+        delay(4);
         p--;
-        if (p < 2)
-          p = 5;
+        if (p < 1)
+          p = 8;
       }
     }  
-    else if (wls = 0)
-      pin_high(0);  
+    else if (steps = 0)
+      step(0);  
    }
 }    
 
-void pin_high(int i)
+void step(int i)
 {
   switch (i)
   {
@@ -123,9 +108,15 @@ void pin_high(int i)
       digitalWrite(4, LOW);     // Configura o pino 4 como LOW                
       digitalWrite(5, LOW);     // Configura o pino 5 como LOW
       break;
-    case 2:
+    case 1:
       digitalWrite(2, HIGH);    // Configura o pino 2 como HIGH              
       digitalWrite(3, LOW);     // Configura o pino 3 como LOW  
+      digitalWrite(4, LOW);     // Configura o pino 4 como LOW                
+      digitalWrite(5, LOW);     // Configura o pino 5 como LOW 
+      break;
+    case 2:
+      digitalWrite(2, HIGH);    // Configura o pino 2 como HIGH              
+      digitalWrite(3, HIGH);     // Configura o pino 3 como LOW  
       digitalWrite(4, LOW);     // Configura o pino 4 como LOW                
       digitalWrite(5, LOW);     // Configura o pino 5 como LOW 
       break;
@@ -137,12 +128,30 @@ void pin_high(int i)
       break;
     case 4:
       digitalWrite(2, LOW);    // Configura o pino 2 como HIGH              
+      digitalWrite(3, HIGH);     // Configura o pino 3 como LOW  
+      digitalWrite(4, HIGH);     // Configura o pino 4 como LOW                
+      digitalWrite(5, LOW);     // Configura o pino 5 como LOW
+      break;
+    case 5:
+      digitalWrite(2, LOW);    // Configura o pino 2 como HIGH              
       digitalWrite(3, LOW);     // Configura o pino 3 como LOW  
       digitalWrite(4, HIGH);     // Configura o pino 4 como LOW                
       digitalWrite(5, LOW);     // Configura o pino 5 como LOW 
       break;
-    case 5:
+    case 6:
       digitalWrite(2, LOW);    // Configura o pino 2 como HIGH              
+      digitalWrite(3, LOW);     // Configura o pino 3 como LOW  
+      digitalWrite(4, HIGH);     // Configura o pino 4 como LOW                
+      digitalWrite(5, HIGH);     // Configura o pino 5 como LOW 
+      break;
+    case 7:
+      digitalWrite(2, LOW);    // Configura o pino 2 como HIGH              
+      digitalWrite(3, LOW);     // Configura o pino 3 como LOW  
+      digitalWrite(4, LOW);     // Configura o pino 4 como LOW                
+      digitalWrite(5, HIGH);     // Configura o pino 5 como LOW 
+      break;
+    case 8:
+      digitalWrite(2, HIGH);    // Configura o pino 2 como HIGH              
       digitalWrite(3, LOW);     // Configura o pino 3 como LOW  
       digitalWrite(4, LOW);     // Configura o pino 4 como LOW                
       digitalWrite(5, HIGH);     // Configura o pino 5 como LOW
