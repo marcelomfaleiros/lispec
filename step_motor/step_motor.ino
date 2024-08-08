@@ -24,47 +24,35 @@ void loop()
 {         
   if (digitalRead(8) == LOW)      //button pressed
   {
-    while (digitalRead(8) == LOW)
-    {
-      step(p);
-      delay(5);
-      p--;
-      if (p < 1)
-        p = 8;
-    }
+    step(p);
+    delay(5);
+    p--;
+    if (p < 1)
+      p = 8;
   }    
   if (digitalRead(9) == LOW)
   {
-    while (digitalRead(9) == LOW)
-    {
-      step(p);
-      delay(5);
-      p++;
-      if (p > 8)
-        p = 1;
-    }
+    step(p);
+    delay(5);
+    p++;
+    if (p > 8)
+      p = 1;
   }    
   if (digitalRead(10) == LOW)
   {
-    while (digitalRead(10) == LOW)
-    {
-      step(p);
-      delay(60);
-      p--;
-      if (p < 1)
-        p = 8;
-    }
+    step(p);
+    delay(60);
+    p--;
+    if (p < 1)
+      p = 8;
   }    
   /*if (digitalRead(11) == LOW)
   {
-    while (digitalRead(11) == LOW)
-    {
-      step(p);
-      delay(60);
-      p++;
-      if (p > 5)
-        p = 2;
-    }
+    step(p);
+    delay(60);
+    p++;
+    if (p > 5)
+      p = 2;
   } */ 
   if (Serial.available() > 0)   //verifica a porta serial 
   { 
