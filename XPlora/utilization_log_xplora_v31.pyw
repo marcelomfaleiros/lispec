@@ -45,7 +45,7 @@ class Report(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        uic.loadUi('utilization_log_xplora_intrfc_v20.ui', self)
+        uic.loadUi('utilization_log_xplora_intrfc_v31.ui', self)
 
         self.save_pushButton.clicked.connect(self.save)
         self.report_pushButton.clicked.connect(self.report)
@@ -56,7 +56,7 @@ class Report(QtWidgets.QWidget):
 
         advisors_file = pd.read_csv('advisors_list.csv')
         self.advisors_list = list(advisors_file['Orientador'])
-        self.advisor_comboBox.addItems(self.advisors_list)
+        #self.advisor_comboBox.addItems(self.advisors_list)
 
         self.estat_method_comboBox.addItems(self.estat_method)
         self.abrangencia_comboBox.addItems(self.coverage)
@@ -76,7 +76,7 @@ class Report(QtWidgets.QWidget):
         self.user_comboBox.addItems(sorted(users_list))
         self.technician_comboBox.addItems(sorted(users_list)) 
 
-    def user_status(self):
+    """def user_status(self):
        if self.ic_checkBox.isChecked():
            user_status = self.ic_checkBox.text()
        elif self.mestrado_checkBox.isChecked():
@@ -103,7 +103,7 @@ class Report(QtWidgets.QWidget):
            user_status = self.treinamento_checkBox.text()
            advisor = "N/C"
        else:
-           user_status = "N/C" 
+           user_status = "N/C" """
 
     def sample_nature(self):
        smpl_nature = []
